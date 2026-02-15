@@ -47,12 +47,16 @@
             margin-bottom: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
         .locale-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white; padding: 20px; border-radius: 10px; margin-bottom: 20px;
             display: flex; align-items: center; gap: 15px;
-            margin-bottom: 20px; padding-bottom: 15px; border-bottom: 2px solid #eee;
         }
-        .locale-header img { height: 50px; width: auto; }
-        .locale-header-text h2 { font-size: 1.8em; color: #333; }
-        .locale-header-text .periodo { font-size: 0.85em; color: #888; }
+        .locale-header img {
+            height: 50px; width: auto;
+            filter: brightness(0) invert(1) drop-shadow(1px 1px 2px rgba(0,0,0,0.3));
+        }
+        .locale-header-text h2 { font-size: 1.8em; }
+        .locale-header-text .periodo { font-size: 0.85em; opacity: 0.9; }
         table {
             width: 100%; border-collapse: collapse; margin-top: 15px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
@@ -100,7 +104,7 @@
             <img id="header-logo" src="svizzero_logo.svg" alt="Logo">
             <h1 id="page-title">Ordini Svizzero</h1>
         </div>
-        <div class="data-aggiornamento">Aggiornato il 15/02/2026 alle 19:18</div>
+        <div class="data-aggiornamento">Aggiornato il 15/02/2026 alle 19:23</div>
         <div class="tabs">
             <button class="tab-btn active" onclick="switchTab('Svizzero')">Svizzero</button>
             <button class="tab-btn" onclick="switchTab('Bacan')">Bacan</button>
@@ -118,7 +122,7 @@
                 <thead><tr><th>Prodotto</th>
 <th>LU</th><th>MA</th><th>ME</th><th>GI</th><th>VE</th><th>SA</th><th>DO</th></tr></thead><tbody>
 <tr><td>CANNONCINO Crema</td><td class="">18</td><td class="">14</td><td class="">15</td><td class="">12</td><td class="">10</td><td class="">11</td><td class="">12</td></tr>
-<tr><td>CROISSANT Farcito</td><td class="">66</td><td class="">66</td><td class="">43</td><td class="">47</td><td class="">55</td><td class="">72</td><td class="">74</td></tr>
+<tr><td>CROISSANT Farcito</td><td class="">66</td><td class="">66</td><td class="">43</td><td class="">47</td><td class="">66</td><td class="">72</td><td class="">74</td></tr>
 <tr><td>CROISSANT Tiramisù</td><td class="">6</td><td class="">6</td><td class="">3</td><td class="zero">-</td><td class="zero">-</td><td class="zero">-</td><td class="">12</td></tr>
 <tr><td>CROISSANT Vuoto</td><td class="">15</td><td class="">10</td><td class="">9</td><td class="">12</td><td class="">11</td><td class="">10</td><td class="">12</td></tr>
 <tr><td>CROISSANT integrale</td><td class="">2</td><td class="">6</td><td class="">2</td><td class="">8</td><td class="">9</td><td class="">7</td><td class="">16</td></tr>
@@ -130,12 +134,12 @@
 <tr><td>VENEZIANA</td><td class="">8</td><td class="">10</td><td class="">5</td><td class="">10</td><td class="">9</td><td class="">10</td><td class="">10</td></tr>
 <tr><td>VENEZIANA Farcita</td><td class="">22</td><td class="">26</td><td class="">28</td><td class="">26</td><td class="">23</td><td class="">38</td><td class="">36</td></tr>
 <tr><td>VENEZIANA Gocce di Cioccolato</td><td class="">9</td><td class="">12</td><td class="">12</td><td class="">12</td><td class="">11</td><td class="">16</td><td class="">16</td></tr>
-<tr><td>PIZZETTA DELIZIA</td><td class="">11</td><td class="">6</td><td class="">8</td><td class="">8</td><td class="">10</td><td class="">10</td><td class="">9</td></tr>
+<tr><td>PIZZETTA DELIZIA</td><td class="">11</td><td class="">6</td><td class="">8</td><td class="zero">-</td><td class="">10</td><td class="zero">-</td><td class="">9</td></tr>
 <tr><td>PIZZETTA NAPOLI</td><td class="">10</td><td class="">10</td><td class="">6</td><td class="">8</td><td class="">8</td><td class="">10</td><td class="">10</td></tr>
 <tr><td>PIZZETTA SFOGLIA</td><td class="">20</td><td class="">22</td><td class="">25</td><td class="">24</td><td class="">28</td><td class="">26</td><td class="">34</td></tr>
-<tr><td>SFOGLIA Prosc. e Formaggio</td><td class="">7</td><td class="">6</td><td class="">8</td><td class="">8</td><td class="">8</td><td class="">10</td><td class="">12</td></tr>
+<tr><td>SFOGLIA Prosc. e Formaggio</td><td class="">7</td><td class="">6</td><td class="">6</td><td class="">6</td><td class="">6</td><td class="">6</td><td class="">10</td></tr>
 <tr><td>IMPASTO Zeppole</td><td class="">5</td><td class="">5</td><td class="">5</td><td class="">5</td><td class="">5</td><td class="">6</td><td class="">6</td></tr>
-<tr class="totale-row"><td>TOTALE</td><td>255</td><td>265</td><td>219</td><td>231</td><td>244</td><td>292</td><td>331</td></tr></tbody></table></div>
+<tr class="totale-row"><td>TOTALE</td><td>255</td><td>265</td><td>217</td><td>221</td><td>253</td><td>278</td><td>329</td></tr></tbody></table></div>
 
         <div class="locale-section" data-locale="Bacan" data-logo="bacan_logo.svg">
             <div class="locale-header">
