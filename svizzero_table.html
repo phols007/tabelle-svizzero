@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="it"><head>
+<html lang="it">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
@@ -222,41 +223,20 @@
 <body>
     <div class="header">
         <div class="header-left">
-            <img id="header-logo" src="bacan_logo.svg" alt="Logo">
+            <img id="header-logo" src="svizzero_logo.svg" alt="Logo">
             <div>
                 <div class="breadcrumb">dashboard / piano-produzione</div>
-                <h1 id="page-title">Piano Produzione - Bacan</h1>
+                <h1 id="page-title">Piano Produzione - Svizzero</h1>
             </div>
         </div>
         <div class="location-filter" id="locationFilter">
-            <button class="location-btn" data-locale="Svizzero" onclick="changeLocation('Svizzero', this)">SVIZZERO</button>
-            <button class="location-btn active" data-locale="Bacan" onclick="changeLocation('Bacan', this)">BACAN</button>
+            <button class="location-btn active" data-locale="Svizzero" onclick="changeLocation('Svizzero', this)">SVIZZERO</button>
+            <button class="location-btn" data-locale="Bacan" onclick="changeLocation('Bacan', this)">BACAN</button>
         </div>
     </div>
 
     <div class="container">
-        <div class="kpi-row" id="kpiRow">
-            <div class="kpi-card blue">
-                <div class="kpi-label">Ordinati / settimana</div>
-                <div class="kpi-value">297</div>
-                <div class="kpi-sub">media pezzi ordinati</div>
-            </div>
-            <div class="kpi-card red">
-                <div class="kpi-label">Scartati / settimana</div>
-                <div class="kpi-value">43</div>
-                <div class="kpi-sub">media pezzi sprecati</div>
-            </div>
-            <div class="kpi-card yellow">
-                <div class="kpi-label">% Spreco</div>
-                <div class="kpi-value">14.5%</div>
-                <div class="kpi-sub">sul totale ordinato</div>
-            </div>
-            <div class="kpi-card green">
-                <div class="kpi-label">Risparmio possibile</div>
-                <div class="kpi-value">43</div>
-                <div class="kpi-sub">pezzi/sett evitabili</div>
-            </div>
-        </div>
+        <div class="kpi-row" id="kpiRow"></div>
 
         <div class="info-box">
             <h2>Come leggere la tabella</h2>
@@ -280,7 +260,7 @@
                 <div class="label">Dati basati sul periodo</div>
                 <div class="value">02/02/2026 - 15/02/2026</div>
             </div>
-            <div class="agg">Aggiornato il 16/02/2026 alle 18:47</div>
+            <div class="agg">Aggiornato il 16/02/2026 alle 18:53</div>
         </div>
 
         <div class="table-section">
@@ -292,17 +272,17 @@
                         <th>VEN</th><th>SAB</th><th>DOM</th>
                     </tr>
                 </thead>
-                <tbody id="tableBody"><tr class="category-header"><td colspan="8">PASTE</td></tr><tr><td>CANNONCINO Crema</td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_PASTE_0_lu" data-original="3" data-scarto="0" data-produzione="3" data-day="lu" value="3" min="0" oninput="updatePlanification(this)"><div class="badge-group"><span class="scarto-storico zero">✓</span><span class="suggestion perfect">✓ OK</span></div></div></td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_PASTE_0_ma" data-original="3" data-scarto="1" data-produzione="3" data-day="ma" value="3" min="0" oninput="updatePlanification(this)"><div class="badge-group"><span class="scarto-storico low">-1</span><span class="suggestion reduce">→ 2</span></div></div></td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_PASTE_0_me" data-original="3" data-scarto="0" data-produzione="3" data-day="me" value="3" min="0" oninput="updatePlanification(this)"><div class="badge-group"><span class="scarto-storico zero">✓</span><span class="suggestion perfect">✓ OK</span></div></div></td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_PASTE_0_gi" data-original="2" data-scarto="0" data-produzione="2" data-day="gi" value="2" min="0" oninput="updatePlanification(this)"><div class="badge-group"><span class="scarto-storico zero">✓</span><span class="suggestion perfect">✓ OK</span></div></div></td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_PASTE_0_ve" data-original="3" data-scarto="0" data-produzione="3" data-day="ve" value="3" min="0" oninput="updatePlanification(this)"><div class="badge-group"><span class="scarto-storico zero">✓</span><span class="suggestion perfect">✓ OK</span></div></div></td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_PASTE_0_sa" data-original="2" data-scarto="1" data-produzione="2" data-day="sa" value="2" min="0" oninput="updatePlanification(this)"><div class="badge-group"><span class="scarto-storico low">-1</span><span class="suggestion reduce">→ 1</span></div></div></td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_PASTE_0_do" data-original="4" data-scarto="1" data-produzione="4" data-day="do" value="4" min="0" oninput="updatePlanification(this)"><div class="badge-group"><span class="scarto-storico low">-1</span><span class="suggestion reduce">→ 3</span></div></div></td></tr><tr><td>CROISSANT Tiramisù</td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_PASTE_1_lu" data-original="1" data-scarto="0" data-produzione="1" data-day="lu" value="1" min="0" oninput="updatePlanification(this)"><div class="badge-group"><span class="scarto-storico zero">✓</span><span class="suggestion perfect">✓ OK</span></div></div></td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_PASTE_1_ma" data-original="1" data-scarto="1" data-produzione="1" data-day="ma" value="1" min="0" oninput="updatePlanification(this)"><div class="badge-group"><span class="scarto-storico low">-1</span><span class="suggestion reduce">→ 0</span></div></div></td><td><div class="day-content"><input type="number" class="prod-input modified" data-key="Bacan_PASTE_1_me" data-original="0" data-scarto="0" data-produzione="0" data-day="me" value="1" min="0" oninput="updatePlanification(this)"></div></td><td><div class="day-content"><input type="number" class="prod-input modified" data-key="Bacan_PASTE_1_gi" data-original="0" data-scarto="0" data-produzione="0" data-day="gi" value="1" min="0" oninput="updatePlanification(this)"></div></td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_PASTE_1_ve" data-original="1" data-scarto="0" data-produzione="1" data-day="ve" value="1" min="0" oninput="updatePlanification(this)"><div class="badge-group"><span class="scarto-storico zero">✓</span><span class="suggestion perfect">✓ OK</span></div></div></td><td><div class="day-content"><input type="number" class="prod-input modified" data-key="Bacan_PASTE_1_sa" data-original="0" data-scarto="0" data-produzione="0" data-day="sa" value="1" min="0" oninput="updatePlanification(this)"></div></td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_PASTE_1_do" data-original="1" data-scarto="0" data-produzione="1" data-day="do" value="1" min="0" oninput="updatePlanification(this)"><div class="badge-group"><span class="scarto-storico zero">✓</span><span class="suggestion perfect">✓ OK</span></div></div></td></tr><tr><td>CROISSANT Vuoto</td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_PASTE_2_lu" data-original="2" data-scarto="1" data-produzione="2" data-day="lu" value="2" min="0" oninput="updatePlanification(this)"><div class="badge-group"><span class="scarto-storico low">-1</span><span class="suggestion reduce">→ 1</span></div></div></td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_PASTE_2_ma" data-original="2" data-scarto="2" data-produzione="2" data-day="ma" value="2" min="0" oninput="updatePlanification(this)"><div class="badge-group"><span class="scarto-storico low">-2</span><span class="suggestion reduce">→ 0</span></div></div></td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_PASTE_2_me" data-original="2" data-scarto="0" data-produzione="2" data-day="me" value="2" min="0" oninput="updatePlanification(this)"><div class="badge-group"><span class="scarto-storico zero">✓</span><span class="suggestion perfect">✓ OK</span></div></div></td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_PASTE_2_gi" data-original="2" data-scarto="0" data-produzione="2" data-day="gi" value="2" min="0" oninput="updatePlanification(this)"><div class="badge-group"><span class="scarto-storico zero">✓</span><span class="suggestion perfect">✓ OK</span></div></div></td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_PASTE_2_ve" data-original="2" data-scarto="0" data-produzione="2" data-day="ve" value="2" min="0" oninput="updatePlanification(this)"><div class="badge-group"><span class="scarto-storico zero">✓</span><span class="suggestion perfect">✓ OK</span></div></div></td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_PASTE_2_sa" data-original="3" data-scarto="0" data-produzione="3" data-day="sa" value="3" min="0" oninput="updatePlanification(this)"><div class="badge-group"><span class="scarto-storico zero">✓</span><span class="suggestion perfect">✓ OK</span></div></div></td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_PASTE_2_do" data-original="4" data-scarto="1" data-produzione="4" data-day="do" value="4" min="0" oninput="updatePlanification(this)"><div class="badge-group"><span class="scarto-storico low">-1</span><span class="suggestion reduce">→ 3</span></div></div></td></tr><tr><td>CROISSANT vegano</td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_PASTE_3_lu" data-original="2" data-scarto="2" data-produzione="2" data-day="lu" value="2" min="0" oninput="updatePlanification(this)"><div class="badge-group"><span class="scarto-storico low">-2</span><span class="suggestion reduce">→ 0</span></div></div></td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_PASTE_3_ma" data-original="2" data-scarto="2" data-produzione="2" data-day="ma" value="2" min="0" oninput="updatePlanification(this)"><div class="badge-group"><span class="scarto-storico low">-2</span><span class="suggestion reduce">→ 0</span></div></div></td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_PASTE_3_me" data-original="2" data-scarto="0" data-produzione="2" data-day="me" value="2" min="0" oninput="updatePlanification(this)"><div class="badge-group"><span class="scarto-storico zero">✓</span><span class="suggestion perfect">✓ OK</span></div></div></td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_PASTE_3_gi" data-original="2" data-scarto="0" data-produzione="2" data-day="gi" value="2" min="0" oninput="updatePlanification(this)"><div class="badge-group"><span class="scarto-storico zero">✓</span><span class="suggestion perfect">✓ OK</span></div></div></td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_PASTE_3_ve" data-original="2" data-scarto="0" data-produzione="2" data-day="ve" value="2" min="0" oninput="updatePlanification(this)"><div class="badge-group"><span class="scarto-storico zero">✓</span><span class="suggestion perfect">✓ OK</span></div></div></td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_PASTE_3_sa" data-original="2" data-scarto="0" data-produzione="2" data-day="sa" value="2" min="0" oninput="updatePlanification(this)"><div class="badge-group"><span class="scarto-storico zero">✓</span><span class="suggestion perfect">✓ OK</span></div></div></td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_PASTE_3_do" data-original="2" data-scarto="1" data-produzione="2" data-day="do" value="2" min="0" oninput="updatePlanification(this)"><div class="badge-group"><span class="scarto-storico low">-1</span><span class="suggestion reduce">→ 1</span></div></div></td></tr><tr><td>CRUFFIN</td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_PASTE_4_lu" data-original="1" data-scarto="1" data-produzione="1" data-day="lu" value="1" min="0" oninput="updatePlanification(this)"><div class="badge-group"><span class="scarto-storico low">-1</span><span class="suggestion reduce">→ 0</span></div></div></td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_PASTE_4_ma" data-original="1" data-scarto="1" data-produzione="1" data-day="ma" value="1" min="0" oninput="updatePlanification(this)"><div class="badge-group"><span class="scarto-storico low">-1</span><span class="suggestion reduce">→ 0</span></div></div></td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_PASTE_4_me" data-original="1" data-scarto="0" data-produzione="1" data-day="me" value="1" min="0" oninput="updatePlanification(this)"><div class="badge-group"><span class="scarto-storico zero">✓</span><span class="suggestion perfect">✓ OK</span></div></div></td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_PASTE_4_gi" data-original="1" data-scarto="0" data-produzione="1" data-day="gi" value="1" min="0" oninput="updatePlanification(this)"><div class="badge-group"><span class="scarto-storico zero">✓</span><span class="suggestion perfect">✓ OK</span></div></div></td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_PASTE_4_ve" data-original="1" data-scarto="1" data-produzione="1" data-day="ve" value="1" min="0" oninput="updatePlanification(this)"><div class="badge-group"><span class="scarto-storico low">-1</span><span class="suggestion reduce">→ 0</span></div></div></td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_PASTE_4_sa" data-original="2" data-scarto="2" data-produzione="2" data-day="sa" value="2" min="0" oninput="updatePlanification(this)"><div class="badge-group"><span class="scarto-storico low">-2</span><span class="suggestion reduce">→ 0</span></div></div></td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_PASTE_4_do" data-original="2" data-scarto="0" data-produzione="2" data-day="do" value="2" min="0" oninput="updatePlanification(this)"><div class="badge-group"><span class="scarto-storico zero">✓</span><span class="suggestion perfect">✓ OK</span></div></div></td></tr><tr><td>DANESE Ai Frutti Rossi</td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_PASTE_5_lu" data-original="1" data-scarto="0" data-produzione="1" data-day="lu" value="1" min="0" oninput="updatePlanification(this)"><div class="badge-group"><span class="scarto-storico zero">✓</span><span class="suggestion perfect">✓ OK</span></div></div></td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_PASTE_5_ma" data-original="1" data-scarto="1" data-produzione="1" data-day="ma" value="1" min="0" oninput="updatePlanification(this)"><div class="badge-group"><span class="scarto-storico low">-1</span><span class="suggestion reduce">→ 0</span></div></div></td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_PASTE_5_me" data-original="1" data-scarto="0" data-produzione="1" data-day="me" value="1" min="0" oninput="updatePlanification(this)"><div class="badge-group"><span class="scarto-storico zero">✓</span><span class="suggestion perfect">✓ OK</span></div></div></td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_PASTE_5_gi" data-original="1" data-scarto="0" data-produzione="1" data-day="gi" value="1" min="0" oninput="updatePlanification(this)"><div class="badge-group"><span class="scarto-storico zero">✓</span><span class="suggestion perfect">✓ OK</span></div></div></td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_PASTE_5_ve" data-original="1" data-scarto="1" data-produzione="1" data-day="ve" value="1" min="0" oninput="updatePlanification(this)"><div class="badge-group"><span class="scarto-storico low">-1</span><span class="suggestion reduce">→ 0</span></div></div></td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_PASTE_5_sa" data-original="2" data-scarto="1" data-produzione="2" data-day="sa" value="2" min="0" oninput="updatePlanification(this)"><div class="badge-group"><span class="scarto-storico low">-1</span><span class="suggestion reduce">→ 1</span></div></div></td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_PASTE_5_do" data-original="2" data-scarto="0" data-produzione="2" data-day="do" value="2" min="0" oninput="updatePlanification(this)"><div class="badge-group"><span class="scarto-storico zero">✓</span><span class="suggestion perfect">✓ OK</span></div></div></td></tr><tr><td>GIRELLA</td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_PASTE_6_lu" data-original="1" data-scarto="1" data-produzione="1" data-day="lu" value="1" min="0" oninput="updatePlanification(this)"><div class="badge-group"><span class="scarto-storico low">-1</span><span class="suggestion reduce">→ 0</span></div></div></td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_PASTE_6_ma" data-original="1" data-scarto="1" data-produzione="1" data-day="ma" value="1" min="0" oninput="updatePlanification(this)"><div class="badge-group"><span class="scarto-storico low">-1</span><span class="suggestion reduce">→ 0</span></div></div></td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_PASTE_6_me" data-original="1" data-scarto="1" data-produzione="1" data-day="me" value="1" min="0" oninput="updatePlanification(this)"><div class="badge-group"><span class="scarto-storico low">-1</span><span class="suggestion reduce">→ 0</span></div></div></td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_PASTE_6_gi" data-original="2" data-scarto="0" data-produzione="2" data-day="gi" value="2" min="0" oninput="updatePlanification(this)"><div class="badge-group"><span class="scarto-storico zero">✓</span><span class="suggestion perfect">✓ OK</span></div></div></td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_PASTE_6_ve" data-original="1" data-scarto="1" data-produzione="1" data-day="ve" value="1" min="0" oninput="updatePlanification(this)"><div class="badge-group"><span class="scarto-storico low">-1</span><span class="suggestion reduce">→ 0</span></div></div></td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_PASTE_6_sa" data-original="2" data-scarto="2" data-produzione="2" data-day="sa" value="2" min="0" oninput="updatePlanification(this)"><div class="badge-group"><span class="scarto-storico low">-2</span><span class="suggestion reduce">→ 0</span></div></div></td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_PASTE_6_do" data-original="2" data-scarto="0" data-produzione="2" data-day="do" value="2" min="0" oninput="updatePlanification(this)"><div class="badge-group"><span class="scarto-storico zero">✓</span><span class="suggestion perfect">✓ OK</span></div></div></td></tr><tr><td>MINI CROISSANT Vuoto</td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_PASTE_7_lu" data-original="0" data-scarto="0" data-produzione="0" data-day="lu" value="" min="0" oninput="updatePlanification(this)"></div></td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_PASTE_7_ma" data-original="0" data-scarto="0" data-produzione="0" data-day="ma" value="" min="0" oninput="updatePlanification(this)"></div></td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_PASTE_7_me" data-original="0" data-scarto="0" data-produzione="0" data-day="me" value="" min="0" oninput="updatePlanification(this)"></div></td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_PASTE_7_gi" data-original="0" data-scarto="0" data-produzione="0" data-day="gi" value="" min="0" oninput="updatePlanification(this)"></div></td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_PASTE_7_ve" data-original="0" data-scarto="0" data-produzione="0" data-day="ve" value="" min="0" oninput="updatePlanification(this)"></div></td><td><div class="day-content"><input type="number" class="prod-input modified" data-key="Bacan_PASTE_7_sa" data-original="35" data-scarto="0" data-produzione="35" data-day="sa" value="" min="0" oninput="updatePlanification(this)"><div class="badge-group"><span class="scarto-storico zero">✓</span><span class="suggestion perfect">✓ OK</span></div></div></td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_PASTE_7_do" data-original="0" data-scarto="0" data-produzione="0" data-day="do" value="" min="0" oninput="updatePlanification(this)"></div></td></tr><tr><td>PAIN AU CHOCOLAT</td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_PASTE_8_lu" data-original="3" data-scarto="2" data-produzione="3" data-day="lu" value="3" min="0" oninput="updatePlanification(this)"><div class="badge-group"><span class="scarto-storico low">-2</span><span class="suggestion reduce">→ 1</span></div></div></td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_PASTE_8_ma" data-original="2" data-scarto="2" data-produzione="2" data-day="ma" value="2" min="0" oninput="updatePlanification(this)"><div class="badge-group"><span class="scarto-storico low">-2</span><span class="suggestion reduce">→ 0</span></div></div></td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_PASTE_8_me" data-original="2" data-scarto="0" data-produzione="2" data-day="me" value="2" min="0" oninput="updatePlanification(this)"><div class="badge-group"><span class="scarto-storico zero">✓</span><span class="suggestion perfect">✓ OK</span></div></div></td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_PASTE_8_gi" data-original="2" data-scarto="0" data-produzione="2" data-day="gi" value="2" min="0" oninput="updatePlanification(this)"><div class="badge-group"><span class="scarto-storico zero">✓</span><span class="suggestion perfect">✓ OK</span></div></div></td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_PASTE_8_ve" data-original="2" data-scarto="2" data-produzione="2" data-day="ve" value="2" min="0" oninput="updatePlanification(this)"><div class="badge-group"><span class="scarto-storico low">-2</span><span class="suggestion reduce">→ 0</span></div></div></td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_PASTE_8_sa" data-original="4" data-scarto="3" data-produzione="4" data-day="sa" value="4" min="0" oninput="updatePlanification(this)"><div class="badge-group"><span class="scarto-storico ">-3</span><span class="suggestion reduce">→ 1</span></div></div></td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_PASTE_8_do" data-original="4" data-scarto="1" data-produzione="4" data-day="do" value="4" min="0" oninput="updatePlanification(this)"><div class="badge-group"><span class="scarto-storico low">-1</span><span class="suggestion reduce">→ 3</span></div></div></td></tr><tr><td>VENEZIANA</td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_PASTE_9_lu" data-original="1" data-scarto="0" data-produzione="1" data-day="lu" value="1" min="0" oninput="updatePlanification(this)"><div class="badge-group"><span class="scarto-storico zero">✓</span><span class="suggestion perfect">✓ OK</span></div></div></td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_PASTE_9_ma" data-original="1" data-scarto="1" data-produzione="1" data-day="ma" value="1" min="0" oninput="updatePlanification(this)"><div class="badge-group"><span class="scarto-storico low">-1</span><span class="suggestion reduce">→ 0</span></div></div></td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_PASTE_9_me" data-original="1" data-scarto="0" data-produzione="1" data-day="me" value="1" min="0" oninput="updatePlanification(this)"><div class="badge-group"><span class="scarto-storico zero">✓</span><span class="suggestion perfect">✓ OK</span></div></div></td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_PASTE_9_gi" data-original="1" data-scarto="0" data-produzione="1" data-day="gi" value="1" min="0" oninput="updatePlanification(this)"><div class="badge-group"><span class="scarto-storico zero">✓</span><span class="suggestion perfect">✓ OK</span></div></div></td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_PASTE_9_ve" data-original="1" data-scarto="1" data-produzione="1" data-day="ve" value="1" min="0" oninput="updatePlanification(this)"><div class="badge-group"><span class="scarto-storico low">-1</span><span class="suggestion reduce">→ 0</span></div></div></td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_PASTE_9_sa" data-original="3" data-scarto="2" data-produzione="3" data-day="sa" value="3" min="0" oninput="updatePlanification(this)"><div class="badge-group"><span class="scarto-storico low">-2</span><span class="suggestion reduce">→ 1</span></div></div></td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_PASTE_9_do" data-original="2" data-scarto="2" data-produzione="2" data-day="do" value="2" min="0" oninput="updatePlanification(this)"><div class="badge-group"><span class="scarto-storico low">-2</span><span class="suggestion reduce">→ 0</span></div></div></td></tr><tr class="category-header"><td colspan="8">SALATO</td></tr><tr><td>HOT DOG Mini</td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_SALATO_0_lu" data-original="0" data-scarto="0" data-produzione="0" data-day="lu" value="" min="0" oninput="updatePlanification(this)"></div></td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_SALATO_0_ma" data-original="0" data-scarto="0" data-produzione="0" data-day="ma" value="" min="0" oninput="updatePlanification(this)"></div></td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_SALATO_0_me" data-original="0" data-scarto="0" data-produzione="0" data-day="me" value="" min="0" oninput="updatePlanification(this)"></div></td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_SALATO_0_gi" data-original="0" data-scarto="0" data-produzione="0" data-day="gi" value="" min="0" oninput="updatePlanification(this)"></div></td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_SALATO_0_ve" data-original="0" data-scarto="0" data-produzione="0" data-day="ve" value="" min="0" oninput="updatePlanification(this)"></div></td><td><div class="day-content"><input type="number" class="prod-input modified" data-key="Bacan_SALATO_0_sa" data-original="25" data-scarto="0" data-produzione="25" data-day="sa" value="" min="0" oninput="updatePlanification(this)"><div class="badge-group"><span class="scarto-storico zero">✓</span><span class="suggestion perfect">✓ OK</span></div></div></td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_SALATO_0_do" data-original="0" data-scarto="0" data-produzione="0" data-day="do" value="" min="0" oninput="updatePlanification(this)"></div></td></tr><tr><td>PIZZETTA NAPOLI Mini</td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_SALATO_1_lu" data-original="0" data-scarto="0" data-produzione="0" data-day="lu" value="" min="0" oninput="updatePlanification(this)"></div></td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_SALATO_1_ma" data-original="0" data-scarto="0" data-produzione="0" data-day="ma" value="" min="0" oninput="updatePlanification(this)"></div></td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_SALATO_1_me" data-original="0" data-scarto="0" data-produzione="0" data-day="me" value="" min="0" oninput="updatePlanification(this)"></div></td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_SALATO_1_gi" data-original="0" data-scarto="0" data-produzione="0" data-day="gi" value="" min="0" oninput="updatePlanification(this)"></div></td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_SALATO_1_ve" data-original="0" data-scarto="0" data-produzione="0" data-day="ve" value="" min="0" oninput="updatePlanification(this)"></div></td><td><div class="day-content"><input type="number" class="prod-input modified" data-key="Bacan_SALATO_1_sa" data-original="65" data-scarto="0" data-produzione="65" data-day="sa" value="" min="0" oninput="updatePlanification(this)"><div class="badge-group"><span class="scarto-storico zero">✓</span><span class="suggestion perfect">✓ OK</span></div></div></td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_SALATO_1_do" data-original="0" data-scarto="0" data-produzione="0" data-day="do" value="" min="0" oninput="updatePlanification(this)"></div></td></tr><tr><td>PIZZETTA SFOGLIA</td><td><div class="day-content"><input type="number" class="prod-input modified" data-key="Bacan_SALATO_2_lu" data-original="0" data-scarto="0" data-produzione="0" data-day="lu" value="2" min="0" oninput="updatePlanification(this)"></div></td><td><div class="day-content"><input type="number" class="prod-input modified" data-key="Bacan_SALATO_2_ma" data-original="4" data-scarto="0" data-produzione="4" data-day="ma" value="2" min="0" oninput="updatePlanification(this)"><div class="badge-group"><span class="scarto-storico zero">✓</span><span class="suggestion perfect">✓ OK</span></div></div></td><td><div class="day-content"><input type="number" class="prod-input modified" data-key="Bacan_SALATO_2_me" data-original="0" data-scarto="0" data-produzione="0" data-day="me" value="2" min="0" oninput="updatePlanification(this)"></div></td><td><div class="day-content"><input type="number" class="prod-input modified" data-key="Bacan_SALATO_2_gi" data-original="16" data-scarto="0" data-produzione="16" data-day="gi" value="2" min="0" oninput="updatePlanification(this)"><div class="badge-group"><span class="scarto-storico zero">✓</span><span class="suggestion perfect">✓ OK</span></div></div></td><td><div class="day-content"><input type="number" class="prod-input modified" data-key="Bacan_SALATO_2_ve" data-original="0" data-scarto="0" data-produzione="0" data-day="ve" value="2" min="0" oninput="updatePlanification(this)"></div></td><td><div class="day-content"><input type="number" class="prod-input modified" data-key="Bacan_SALATO_2_sa" data-original="10" data-scarto="0" data-produzione="10" data-day="sa" value="2" min="0" oninput="updatePlanification(this)"><div class="badge-group"><span class="scarto-storico zero">✓</span><span class="suggestion perfect">✓ OK</span></div></div></td><td><div class="day-content"><input type="number" class="prod-input modified" data-key="Bacan_SALATO_2_do" data-original="5" data-scarto="0" data-produzione="5" data-day="do" value="2" min="0" oninput="updatePlanification(this)"><div class="badge-group"><span class="scarto-storico zero">✓</span><span class="suggestion perfect">✓ OK</span></div></div></td></tr><tr><td>PIZZETTA SFOGLIE Mini</td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_SALATO_3_lu" data-original="0" data-scarto="0" data-produzione="0" data-day="lu" value="" min="0" oninput="updatePlanification(this)"></div></td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_SALATO_3_ma" data-original="0" data-scarto="0" data-produzione="0" data-day="ma" value="" min="0" oninput="updatePlanification(this)"></div></td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_SALATO_3_me" data-original="0" data-scarto="0" data-produzione="0" data-day="me" value="" min="0" oninput="updatePlanification(this)"></div></td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_SALATO_3_gi" data-original="0" data-scarto="0" data-produzione="0" data-day="gi" value="" min="0" oninput="updatePlanification(this)"></div></td><td><div class="day-content"><input type="number" class="prod-input" data-key="Bacan_SALATO_3_ve" data-original="0" data-scarto="0" data-produzione="0" data-day="ve" value="" min="0" oninput="updatePlanification(this)"></div></td><td><div class="day-content"><input type="number" class="prod-input modified" data-key="Bacan_SALATO_3_sa" data-original="25" data-scarto="0" data-produzione="25" data-day="sa" value="" min="0" oninput="updatePlanification(this)"><div class="badge-group"><span class="scarto-storico zero">✓</span><span class="suggestion perfect">✓ OK</span></div></div></td><td><div class="day-content"><input type="number" class="prod-input modified" data-key="Bacan_SALATO_3_do" data-original="0" data-scarto="0" data-produzione="0" data-day="do" value="" min="0" oninput="updatePlanification(this)"></div></td></tr></tbody>
+                <tbody id="tableBody"></tbody>
                 <tfoot>
                     <tr>
                         <td style="padding-left:25px">TOTALE PIANIFICATO</td>
-                        <td class="total-value" id="totLU">17</td>
-                        <td class="total-value" id="totMA">16</td>
-                        <td class="total-value" id="totME">16</td>
-                        <td class="total-value" id="totGI">16</td>
-                        <td class="total-value" id="totVE">16</td>
-                        <td class="total-value" id="totSA">23</td>
-                        <td class="total-value" id="totDO">100025</td>
+                        <td class="total-value" id="totLU">0</td>
+                        <td class="total-value" id="totMA">0</td>
+                        <td class="total-value" id="totME">0</td>
+                        <td class="total-value" id="totGI">0</td>
+                        <td class="total-value" id="totVE">0</td>
+                        <td class="total-value" id="totSA">0</td>
+                        <td class="total-value" id="totDO">0</td>
                     </tr>
                 </tfoot>
             </table>
@@ -310,9 +290,9 @@
     </div>
 
     <div id="toolbar" style="display:none">
-        <span id="status" style="color: rgb(66, 153, 225);">Pubblicazione in corso...</span>
+        <span id="status">Modifica le quantita' e pubblica quando pronto</span>
         <button id="btn-reset" onclick="resetModifiche()">Reset Modifiche</button>
-        <button id="btn-pubblica" onclick="pubblica()" disabled="">Conferma e Pubblica</button>
+        <button id="btn-pubblica" onclick="pubblica()">Conferma e Pubblica</button>
     </div>
 
     <script>
@@ -336,10 +316,10 @@
             "lu": 18,
             "ma": 14,
             "me": 15,
-            "gi": 12,
-            "ve": 10,
-            "sa": 6,
-            "do": 12
+            "gi": 14,
+            "ve": 11,
+            "sa": 15,
+            "do": 15
           }
         },
         {
@@ -354,12 +334,12 @@
             "do": 4
           },
           "prodMediaAttuale": {
-            "lu": 66,
-            "ma": 66,
+            "lu": 69,
+            "ma": 46,
             "me": 43,
-            "gi": 47,
-            "ve": 66,
-            "sa": 72,
+            "gi": 41,
+            "ve": 55,
+            "sa": 73,
             "do": 74
           }
         },
@@ -375,13 +355,13 @@
             "do": 0
           },
           "prodMediaAttuale": {
-            "lu": 6,
-            "ma": 6,
-            "me": 3,
-            "gi": 0,
-            "ve": 0,
-            "sa": 0,
-            "do": 6
+            "lu": 7,
+            "ma": 3,
+            "me": 5,
+            "gi": 5,
+            "ve": 5,
+            "sa": 12,
+            "do": 14
           }
         },
         {
@@ -398,11 +378,11 @@
           "prodMediaAttuale": {
             "lu": 15,
             "ma": 10,
-            "me": 9,
-            "gi": 12,
-            "ve": 11,
+            "me": 8,
+            "gi": 11,
+            "ve": 10,
             "sa": 10,
-            "do": 12
+            "do": 13
           }
         },
         {
@@ -417,13 +397,13 @@
             "do": 5
           },
           "prodMediaAttuale": {
-            "lu": 2,
-            "ma": 6,
-            "me": 2,
-            "gi": 8,
-            "ve": 9,
-            "sa": 7,
-            "do": 16
+            "lu": 5,
+            "ma": 5,
+            "me": 4,
+            "gi": 5,
+            "ve": 5,
+            "sa": 12,
+            "do": 14
           }
         },
         {
@@ -460,12 +440,12 @@
           },
           "prodMediaAttuale": {
             "lu": 14,
-            "ma": 10,
+            "ma": 8,
             "me": 7,
             "gi": 8,
-            "ve": 9,
-            "sa": 9,
-            "do": 10
+            "ve": 10,
+            "sa": 10,
+            "do": 13
           }
         },
         {
@@ -481,10 +461,10 @@
           },
           "prodMediaAttuale": {
             "lu": 10,
-            "ma": 20,
-            "me": 14,
-            "gi": 14,
-            "ve": 14,
+            "ma": 15,
+            "me": 12,
+            "gi": 16,
+            "ve": 15,
             "sa": 18,
             "do": 20
           }
@@ -501,13 +481,13 @@
             "do": 0
           },
           "prodMediaAttuale": {
-            "lu": 8,
-            "ma": 10,
+            "lu": 10,
+            "ma": 6,
             "me": 8,
             "gi": 6,
-            "ve": 6,
+            "ve": 8,
             "sa": 10,
-            "do": 13
+            "do": 14
           }
         },
         {
@@ -544,7 +524,7 @@
           },
           "prodMediaAttuale": {
             "lu": 0,
-            "ma": 8,
+            "ma": 0,
             "me": 0,
             "gi": 0,
             "ve": 0,
@@ -564,13 +544,13 @@
             "do": 0
           },
           "prodMediaAttuale": {
-            "lu": 20,
-            "ma": 20,
+            "lu": 18,
+            "ma": 13,
             "me": 15,
-            "gi": 16,
-            "ve": 20,
+            "gi": 15,
+            "ve": 17,
             "sa": 22,
-            "do": 21
+            "do": 25
           }
         },
         {
@@ -585,13 +565,13 @@
             "do": 0
           },
           "prodMediaAttuale": {
-            "lu": 8,
-            "ma": 10,
-            "me": 5,
+            "lu": 10,
+            "ma": 8,
+            "me": 8,
             "gi": 10,
-            "ve": 9,
-            "sa": 10,
-            "do": 10
+            "ve": 10,
+            "sa": 11,
+            "do": 11
           }
         },
         {
@@ -606,12 +586,12 @@
             "do": 0
           },
           "prodMediaAttuale": {
-            "lu": 22,
-            "ma": 26,
-            "me": 28,
-            "gi": 26,
-            "ve": 23,
-            "sa": 38,
+            "lu": 24,
+            "ma": 18,
+            "me": 33,
+            "gi": 31,
+            "ve": 20,
+            "sa": 39,
             "do": 36
           }
         },
@@ -628,9 +608,9 @@
           },
           "prodMediaAttuale": {
             "lu": 9,
-            "ma": 12,
-            "me": 12,
-            "gi": 12,
+            "ma": 9,
+            "me": 11,
+            "gi": 10,
             "ve": 11,
             "sa": 16,
             "do": 16
@@ -650,13 +630,13 @@
             "do": 0
           },
           "prodMediaAttuale": {
-            "lu": 6,
-            "ma": 3,
-            "me": 4,
-            "gi": 0,
-            "ve": 5,
-            "sa": 0,
-            "do": 4
+            "lu": 10,
+            "ma": 6,
+            "me": 6,
+            "gi": 6,
+            "ve": 6,
+            "sa": 10,
+            "do": 12
           }
         },
         {
@@ -671,13 +651,13 @@
             "do": 3
           },
           "prodMediaAttuale": {
-            "lu": 10,
+            "lu": 12,
             "ma": 10,
-            "me": 6,
+            "me": 8,
             "gi": 8,
             "ve": 8,
             "sa": 10,
-            "do": 10
+            "do": 15
           }
         },
         {
@@ -693,12 +673,12 @@
           },
           "prodMediaAttuale": {
             "lu": 20,
-            "ma": 22,
-            "me": 25,
-            "gi": 24,
-            "ve": 28,
+            "ma": 18,
+            "me": 18,
+            "gi": 21,
+            "ve": 24,
             "sa": 26,
-            "do": 34
+            "do": 35
           }
         },
         {
@@ -713,13 +693,13 @@
             "do": 0
           },
           "prodMediaAttuale": {
-            "lu": 7,
-            "ma": 3,
-            "me": 4,
-            "gi": 0,
-            "ve": 0,
-            "sa": 0,
-            "do": 0
+            "lu": 8,
+            "ma": 6,
+            "me": 8,
+            "gi": 8,
+            "ve": 8,
+            "sa": 10,
+            "do": 15
           }
         }
       ]
@@ -769,10 +749,10 @@
           "prodMediaAttuale": {
             "lu": 1,
             "ma": 1,
-            "me": 0,
-            "gi": 0,
+            "me": 1,
+            "gi": 1,
             "ve": 1,
-            "sa": 0,
+            "sa": 1,
             "do": 1
           }
         },
@@ -898,7 +878,7 @@
             "me": 0,
             "gi": 0,
             "ve": 0,
-            "sa": 35,
+            "sa": 0,
             "do": 0
           }
         },
@@ -963,7 +943,7 @@
             "me": 0,
             "gi": 0,
             "ve": 0,
-            "sa": 25,
+            "sa": 0,
             "do": 0
           }
         },
@@ -984,7 +964,7 @@
             "me": 0,
             "gi": 0,
             "ve": 0,
-            "sa": 65,
+            "sa": 0,
             "do": 0
           }
         },
@@ -1000,13 +980,13 @@
             "do": 0
           },
           "prodMediaAttuale": {
-            "lu": 0,
-            "ma": 4,
-            "me": 0,
-            "gi": 16,
-            "ve": 0,
-            "sa": 10,
-            "do": 5
+            "lu": 2,
+            "ma": 2,
+            "me": 2,
+            "gi": 2,
+            "ve": 2,
+            "sa": 2,
+            "do": 2
           }
         },
         {
@@ -1026,8 +1006,8 @@
             "me": 0,
             "gi": 0,
             "ve": 0,
-            "sa": 25,
-            "do": 0
+            "sa": 0,
+            "do": 100000
           }
         }
       ]
@@ -1271,19 +1251,23 @@
         status.textContent = 'Pubblicazione in corso...';
         status.style.color = '#4299e1';
 
-        // Raccogli tutti i dati della tabella corrente
-        const payload = {};
-        document.querySelectorAll('.prod-input').forEach(input => {
-            payload[input.dataset.key] = parseInt(input.value) || 0;
+        // Salva modifiche locale corrente
+        savePlanification();
+
+        // Raccogli le modifiche di TUTTI i locali dal localStorage
+        const tutteModifiche = {};
+        Object.keys(datiLocali).forEach(loc => {
+            const saved = localStorage.getItem('piano_' + loc);
+            if (saved) {
+                tutteModifiche[loc] = JSON.parse(saved);
+            }
         });
 
         fetch('/pubblica', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                locale: currentLocation,
-                pianificazione: payload,
-                html: document.documentElement.outerHTML
+                modifiche: tutteModifiche
             })
         })
         .then(r => r.json())
@@ -1308,5 +1292,5 @@
     // ===== START =====
     init();
     </script>
-
-</body></html>
+</body>
+</html>
