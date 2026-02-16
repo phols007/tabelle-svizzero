@@ -156,6 +156,15 @@
         }
         .prod-input.modified { border-color: #ed8936; background: #fffaf0; }
 
+        .delta-indicator {
+            font-size: 0.65em; font-weight: 700; white-space: nowrap;
+            padding: 1px 4px; border-radius: 3px; margin-top: 1px;
+            text-align: center;
+        }
+        .delta-indicator.ottimo { color: #22543d; background: #c6f6d5; }
+        .delta-indicator.residuo { color: #c53030; background: #fed7d7; }
+        .delta-indicator.extra { color: #2b6cb0; background: #bee3f8; }
+
         .category-header {
             background: #edf2f7 !important;
             font-weight: 600; color: #e53e3e !important;
@@ -236,7 +245,7 @@
                 <div class="label">Dati basati sul periodo</div>
                 <div class="value">02/02/2026 - 15/02/2026</div>
             </div>
-            <div class="agg">Aggiornato il 16/02/2026 alle 08:12</div>
+            <div class="agg">Aggiornato il 16/02/2026 alle 08:14</div>
         </div>
 
         <div class="table-section">
@@ -1100,6 +1109,7 @@
                         html += '<td><div class="day-content">';
                         html += '<input type="number" class="prod-input' + (isModified ? ' modified' : '') + '" ';
                         html += 'data-key="' + key + '" data-original="' + prodConsigliato + '" ';
+                        html += 'data-scarto="' + scarto + '" data-produzione="' + prodAttuale + '" ';
                         html += 'data-day="' + day + '" value="' + valore + '" min="0" ';
                         html += 'oninput="updatePlanification(this)">';
                         if (scarto > 0) {
@@ -1124,6 +1134,8 @@
     function updatePlanification(input) {
         const key = input.dataset.key;
         const original = parseInt(input.dataset.original);
+        const scarto = parseInt(input.dataset.scarto) || 0;
+        const prodOriginale = parseInt(input.dataset.produzione) || 0;
         const value = parseInt(input.value) || 0;
 
         pianificazione[key] = value;
@@ -1133,6 +1145,36 @@
         } else {
             input.classList.remove('modified');
             delete pianificazione[key];
+        }
+
+        // Mostra/aggiorna delta indicator
+        const wrapper = input.closest('.day-content');
+        let delta = wrapper.querySelector('.delta-indicator');
+        if (value !== original && scarto > 0) {
+            if (!delta) {
+                delta = document.createElement('div');
+                delta.className = 'delta-indicator';
+                wrapper.appendChild(delta);
+            }
+            // scarto residuo stimato = scarto - (prodOriginale - value)
+            // cioe' quanto scarto rimane se produci "value" invece di "prodOriginale"
+            const riduzione = prodOriginale - value;
+            const scartoResiduo = Math.max(0, scarto - riduzione);
+
+            if (scartoResiduo === 0 && riduzione >= scarto) {
+                delta.className = 'delta-indicator ottimo';
+                delta.textContent = '0 scarti';
+            } else if (riduzione > scarto) {
+                // Ha tagliato piu' dello scarto
+                const extraTaglio = riduzione - scarto;
+                delta.className = 'delta-indicator extra';
+                delta.textContent = '-' + extraTaglio + ' sotto';
+            } else {
+                delta.className = 'delta-indicator residuo';
+                delta.textContent = 'scarti: ' + scartoResiduo;
+            }
+        } else if (delta) {
+            delta.remove();
         }
 
         updateTotals();
