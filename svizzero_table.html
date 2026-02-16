@@ -94,6 +94,16 @@
         .periodo-box .value { font-weight: 600; color: #2d3748; margin-top: 3px; }
         .periodo-box .agg { font-size: 0.8em; color: #a0aec0; }
 
+        .cat-filters { display: flex; align-items: center; gap: 8px; }
+        .cat-filters .filter-label { font-size: 0.8em; color: #718096; text-transform: uppercase; letter-spacing: 0.5px; }
+        .cat-btn {
+            padding: 6px 16px; font-size: 0.85em; font-weight: 600;
+            border: 2px solid #e2e8f0; background: white; color: #718096;
+            cursor: pointer; border-radius: 6px; transition: all 0.2s;
+        }
+        .cat-btn:hover { border-color: #cbd5e0; color: #4a5568; }
+        .cat-btn.active { background: #4299e1; color: white; border-color: #4299e1; }
+
         /* TABELLA */
         .table-section {
             background: white; border-radius: 8px;
@@ -117,8 +127,8 @@
         }
 
         .day-content {
-            display: flex; align-items: center; justify-content: center;
-            gap: 4px; padding: 6px 3px;
+            display: flex; flex-direction: column; align-items: center;
+            justify-content: center; gap: 1px; padding: 4px 3px;
         }
 
         .info-col {
@@ -150,6 +160,10 @@
             font-size: 1.05em; font-weight: 700; color: #2d3748;
             background: white; transition: all 0.2s;
         }
+        .prod-input::-webkit-outer-spin-button,
+        .prod-input::-webkit-inner-spin-button {
+            opacity: 0.3;
+        }
         .prod-input:focus {
             outline: none; border-color: #4299e1; background: white;
             box-shadow: 0 0 0 3px rgba(66,153,225,0.15);
@@ -164,6 +178,7 @@
             font-size: 0.65em; font-weight: 700;
             padding: 1px 5px; border-radius: 3px;
             white-space: nowrap; line-height: 1.3;
+            opacity: 0.5;
         }
         .suggestion.perfect { color: #22543d; background: #c6f6d5; }
         .suggestion.reduce { color: #2b6cb0; background: #bee3f8; }
@@ -260,7 +275,11 @@
                 <div class="label">Dati basati sul periodo</div>
                 <div class="value">02/02/2026 - 15/02/2026</div>
             </div>
-            <div class="agg">Aggiornato il 16/02/2026 alle 18:53</div>
+            <div class="cat-filters">
+                <span class="filter-label">Categorie:</span>
+                <button class="cat-btn active" onclick="toggleCategory(this, 'PASTE')">PASTE</button> <button class="cat-btn active" onclick="toggleCategory(this, 'SALATO')">SALATO</button>
+            </div>
+            <div class="agg">Aggiornato il 16/02/2026 alle 19:05</div>
         </div>
 
         <div class="table-section">
@@ -894,7 +913,7 @@
             "do": 1
           },
           "prodMediaAttuale": {
-            "lu": 3,
+            "lu": 2,
             "ma": 2,
             "me": 2,
             "gi": 2,
@@ -1007,7 +1026,7 @@
             "gi": 0,
             "ve": 0,
             "sa": 0,
-            "do": 100000
+            "do": 0
           }
         }
       ]
@@ -1025,6 +1044,19 @@
     const giorniLabel = ['LUN', 'MAR', 'MER', 'GIO', 'VEN', 'SAB', 'DOM'];
     let currentLocation = 'Svizzero';
     let pianificazione = {};
+    let categorieAttive = new Set(["PASTE", "SALATO"]);
+
+    // ===== FILTRO CATEGORIE =====
+    function toggleCategory(btn, cat) {
+        btn.classList.toggle('active');
+        if (categorieAttive.has(cat)) {
+            categorieAttive.delete(cat);
+        } else {
+            categorieAttive.add(cat);
+        }
+        renderTable();
+        updateTotals();
+    }
 
     // ===== INIT =====
     function init() {
@@ -1086,7 +1118,7 @@
         const tbody = document.getElementById('tableBody');
         tbody.innerHTML = '';
 
-        Object.keys(data.categories).forEach(category => {
+        Object.keys(data.categories).filter(cat => categorieAttive.has(cat)).forEach(category => {
             // Header categoria
             const catRow = document.createElement('tr');
             catRow.classList.add('category-header');
@@ -1102,16 +1134,6 @@
                     const scarto = product.scarto[day];
                     const prodAttuale = product.prodMediaAttuale[day];
                     const prodConsigliato = Math.max(0, prodAttuale - scarto);
-                    const scartoClass = scarto === 0 ? 'zero' : (scarto <= 2 ? 'low' : '');
-
-                    let suggText, suggClass;
-                    if (scarto === 0) {
-                        suggText = '&#10003; OK';
-                        suggClass = 'perfect';
-                    } else {
-                        suggText = '&#8594; ' + prodConsigliato;
-                        suggClass = 'reduce';
-                    }
 
                     const key = currentLocation + '_' + category + '_' + idx + '_' + day;
                     const valore = pianificazione[key] !== undefined ? pianificazione[key] : prodAttuale;
@@ -1123,11 +1145,9 @@
                     html += 'data-scarto="' + scarto + '" data-produzione="' + prodAttuale + '" ';
                     html += 'data-day="' + day + '" value="' + (valore || '') + '" min="0" ';
                     html += 'oninput="updatePlanification(this)">';
-                    if (prodAttuale > 0 || scarto > 0) {
+                    if (scarto > 0) {
                         html += '<div class="badge-group">';
-                        html += '<span class="scarto-storico ' + scartoClass + '">';
-                        html += (scarto === 0 ? '&#10003;' : '-' + scarto) + '</span>';
-                        html += '<span class="suggestion ' + suggClass + '">' + suggText + '</span>';
+                        html += '<span class="suggestion reduce">&#8594; ' + prodConsigliato + '</span>';
                         html += '</div>';
                     }
                     html += '</div></td>';
