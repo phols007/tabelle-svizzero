@@ -245,7 +245,7 @@
                 <div class="label">Dati basati sul periodo</div>
                 <div class="value">02/02/2026 - 15/02/2026</div>
             </div>
-            <div class="agg">Aggiornato il 16/02/2026 alle 08:17</div>
+            <div class="agg">Aggiornato il 16/02/2026 alle 08:19</div>
         </div>
 
         <div class="table-section">
@@ -1102,22 +1102,20 @@
                     const valore = pianificazione[key] !== undefined ? pianificazione[key] : prodAttuale;
                     const isModified = pianificazione[key] !== undefined && pianificazione[key] !== prodAttuale;
 
-                    if (prodAttuale === 0 && scarto === 0) {
-                        html += '<td><div class="day-content" style="color:#ccc">-</div></td>';
-                    } else {
-                        html += '<td><div class="day-content">';
-                        html += '<input type="number" class="prod-input' + (isModified ? ' modified' : '') + '" ';
-                        html += 'data-key="' + key + '" data-original="' + prodAttuale + '" ';
-                        html += 'data-scarto="' + scarto + '" data-produzione="' + prodAttuale + '" ';
-                        html += 'data-day="' + day + '" value="' + valore + '" min="0" ';
-                        html += 'oninput="updatePlanification(this)">';
+                    html += '<td><div class="day-content">';
+                    html += '<input type="number" class="prod-input' + (isModified ? ' modified' : '') + '" ';
+                    html += 'data-key="' + key + '" data-original="' + prodAttuale + '" ';
+                    html += 'data-scarto="' + scarto + '" data-produzione="' + prodAttuale + '" ';
+                    html += 'data-day="' + day + '" value="' + (valore || '') + '" min="0" ';
+                    html += 'oninput="updatePlanification(this)">';
+                    if (prodAttuale > 0 || scarto > 0) {
                         html += '<div class="badge-group">';
                         html += '<span class="scarto-storico ' + scartoClass + '">';
                         html += (scarto === 0 ? '&#10003;' : '-' + scarto) + '</span>';
                         html += '<span class="suggestion ' + suggClass + '">' + suggText + '</span>';
                         html += '</div>';
-                        html += '</div></td>';
                     }
+                    html += '</div></td>';
                 });
 
                 tr.innerHTML = html;
