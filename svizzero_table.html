@@ -117,30 +117,37 @@
         }
 
         .day-content {
-            display: flex; flex-direction: column; align-items: center;
-            gap: 5px; padding: 10px 6px;
+            display: flex; align-items: center; justify-content: center;
+            gap: 6px; padding: 8px 4px;
+        }
+
+        .badge-group {
+            display: flex; flex-direction: column; align-items: flex-start;
+            gap: 2px;
         }
 
         .scarto-storico {
-            display: inline-flex; align-items: center; gap: 3px;
-            padding: 3px 8px; border-radius: 4px;
-            font-size: 0.78em; font-weight: 600;
+            display: inline-flex; align-items: center; gap: 2px;
+            padding: 2px 6px; border-radius: 4px;
+            font-size: 0.7em; font-weight: 600;
             background: #fed7d7; color: #c53030;
+            white-space: nowrap;
         }
         .scarto-storico.zero { background: #c6f6d5; color: #22543d; }
         .scarto-storico.low { background: #fefcbf; color: #744210; }
 
         .suggestion {
-            font-size: 0.7em; font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px;
+            font-size: 0.6em; font-weight: 600; letter-spacing: 0.2px;
+            white-space: nowrap;
         }
         .suggestion.reduce { color: #e53e3e; }
         .suggestion.increase { color: #38a169; }
         .suggestion.perfect { color: #22543d; }
 
         .prod-input {
-            width: 60px; padding: 7px 8px; text-align: center;
+            width: 52px; padding: 6px 4px; text-align: center;
             border: 2px solid #e2e8f0; border-radius: 6px;
-            font-size: 1em; font-weight: 600; color: #2d3748;
+            font-size: 1.05em; font-weight: 700; color: #2d3748;
             background: white; transition: all 0.2s;
         }
         .prod-input:focus {
@@ -229,7 +236,7 @@
                 <div class="label">Dati basati sul periodo</div>
                 <div class="value">02/02/2026 - 15/02/2026</div>
             </div>
-            <div class="agg">Aggiornato il 16/02/2026 alle 07:54</div>
+            <div class="agg">Aggiornato il 16/02/2026 alle 08:02</div>
         </div>
 
         <div class="table-section">
@@ -269,220 +276,6 @@
     const datiLocali = {
   "Svizzero": {
     "categories": {
-      "BISCOTTI": [
-        {
-          "name": "BACI DI DAMA",
-          "scarto": {
-            "lu": 0,
-            "ma": 0,
-            "me": 0,
-            "gi": 0,
-            "ve": 0,
-            "sa": 0,
-            "do": 0
-          },
-          "prodMediaAttuale": {
-            "lu": 5,
-            "ma": 0,
-            "me": 10,
-            "gi": 0,
-            "ve": 0,
-            "sa": 0,
-            "do": 10
-          }
-        },
-        {
-          "name": "CIAMBELLINE Marmellata",
-          "scarto": {
-            "lu": 0,
-            "ma": 0,
-            "me": 0,
-            "gi": 0,
-            "ve": 0,
-            "sa": 0,
-            "do": 0
-          },
-          "prodMediaAttuale": {
-            "lu": 30,
-            "ma": 0,
-            "me": 0,
-            "gi": 0,
-            "ve": 0,
-            "sa": 0,
-            "do": 0
-          }
-        },
-        {
-          "name": "COOKIES",
-          "scarto": {
-            "lu": 0,
-            "ma": 0,
-            "me": 0,
-            "gi": 0,
-            "ve": 0,
-            "sa": 0,
-            "do": 0
-          },
-          "prodMediaAttuale": {
-            "lu": 8,
-            "ma": 0,
-            "me": 18,
-            "gi": 0,
-            "ve": 0,
-            "sa": 5,
-            "do": 3
-          }
-        },
-        {
-          "name": "FLOR DE SAL",
-          "scarto": {
-            "lu": 0,
-            "ma": 0,
-            "me": 0,
-            "gi": 0,
-            "ve": 0,
-            "sa": 0,
-            "do": 0
-          },
-          "prodMediaAttuale": {
-            "lu": 5,
-            "ma": 0,
-            "me": 10,
-            "gi": 0,
-            "ve": 0,
-            "sa": 8,
-            "do": 0
-          }
-        },
-        {
-          "name": "MERINGHE",
-          "scarto": {
-            "lu": 0,
-            "ma": 0,
-            "me": 0,
-            "gi": 0,
-            "ve": 0,
-            "sa": 0,
-            "do": 0
-          },
-          "prodMediaAttuale": {
-            "lu": 0,
-            "ma": 0,
-            "me": 10,
-            "gi": 12,
-            "ve": 5,
-            "sa": 15,
-            "do": 0
-          }
-        }
-      ],
-      "PANE": [
-        {
-          "name": "BUN BURGER",
-          "scarto": {
-            "lu": 0,
-            "ma": 0,
-            "me": 0,
-            "gi": 0,
-            "ve": 0,
-            "sa": 0,
-            "do": 0
-          },
-          "prodMediaAttuale": {
-            "lu": 2,
-            "ma": 5,
-            "me": 2,
-            "gi": 2,
-            "ve": 8,
-            "sa": 15,
-            "do": 8
-          }
-        },
-        {
-          "name": "FILONE 500 Gr. Circa",
-          "scarto": {
-            "lu": 0,
-            "ma": 0,
-            "me": 0,
-            "gi": 0,
-            "ve": 0,
-            "sa": 0,
-            "do": 0
-          },
-          "prodMediaAttuale": {
-            "lu": 1,
-            "ma": 2,
-            "me": 2,
-            "gi": 1,
-            "ve": 4,
-            "sa": 4,
-            "do": 4
-          }
-        },
-        {
-          "name": "FOCACCIA",
-          "scarto": {
-            "lu": 0,
-            "ma": 0,
-            "me": 0,
-            "gi": 2,
-            "ve": 1,
-            "sa": 1,
-            "do": 0
-          },
-          "prodMediaAttuale": {
-            "lu": 0,
-            "ma": 2,
-            "me": 0,
-            "gi": 0,
-            "ve": 0,
-            "sa": 1,
-            "do": 1
-          }
-        },
-        {
-          "name": "FOCACCIA Gusti Vari",
-          "scarto": {
-            "lu": 0,
-            "ma": 8,
-            "me": 0,
-            "gi": 0,
-            "ve": 0,
-            "sa": 0,
-            "do": 0
-          },
-          "prodMediaAttuale": {
-            "lu": 6,
-            "ma": 0,
-            "me": 6,
-            "gi": 0,
-            "ve": 0,
-            "sa": 0,
-            "do": 0
-          }
-        },
-        {
-          "name": "PAN BAULETTO 600 Gr. Circa",
-          "scarto": {
-            "lu": 0,
-            "ma": 0,
-            "me": 0,
-            "gi": 0,
-            "ve": 0,
-            "sa": 0,
-            "do": 0
-          },
-          "prodMediaAttuale": {
-            "lu": 1,
-            "ma": 2,
-            "me": 1,
-            "gi": 1,
-            "ve": 2,
-            "sa": 3,
-            "do": 2
-          }
-        }
-      ],
       "PASTE": [
         {
           "name": "CANNONCINO Crema",
@@ -800,50 +593,6 @@
           }
         }
       ],
-      "PREPARAZIONI": [
-        {
-          "name": "CIOCCOLATA Calda Prep. kg 1",
-          "scarto": {
-            "lu": 0,
-            "ma": 0,
-            "me": 0,
-            "gi": 0,
-            "ve": 0,
-            "sa": 0,
-            "do": 0
-          },
-          "prodMediaAttuale": {
-            "lu": 0,
-            "ma": 0,
-            "me": 0,
-            "gi": 0,
-            "ve": 2,
-            "sa": 2,
-            "do": 0
-          }
-        },
-        {
-          "name": "IMPASTO Zeppole",
-          "scarto": {
-            "lu": 0,
-            "ma": 0,
-            "me": 0,
-            "gi": 0,
-            "ve": 0,
-            "sa": 0,
-            "do": 0
-          },
-          "prodMediaAttuale": {
-            "lu": 2,
-            "ma": 2,
-            "me": 2,
-            "gi": 2,
-            "ve": 2,
-            "sa": 3,
-            "do": 3
-          }
-        }
-      ],
       "SALATO": [
         {
           "name": "PIZZETTA DELIZIA",
@@ -929,212 +678,17 @@
             "do": 0
           }
         }
-      ],
-      "MINION": [
-        {
-          "name": "TARTELLETTA Gianduia",
-          "scarto": {
-            "lu": 0,
-            "ma": 0,
-            "me": 0,
-            "gi": 0,
-            "ve": 0,
-            "sa": 0,
-            "do": 0
-          },
-          "prodMediaAttuale": {
-            "lu": 7,
-            "ma": 2,
-            "me": 5,
-            "gi": 4,
-            "ve": 4,
-            "sa": 2,
-            "do": 5
-          }
-        },
-        {
-          "name": "TARTELLETTA Grande Crema e Frutta",
-          "scarto": {
-            "lu": 0,
-            "ma": 0,
-            "me": 0,
-            "gi": 0,
-            "ve": 0,
-            "sa": 0,
-            "do": 0
-          },
-          "prodMediaAttuale": {
-            "lu": 3,
-            "ma": 5,
-            "me": 2,
-            "gi": 2,
-            "ve": 4,
-            "sa": 3,
-            "do": 2
-          }
-        },
-        {
-          "name": "TARTELLETTA Piccola Crema e Frutta",
-          "scarto": {
-            "lu": 0,
-            "ma": 0,
-            "me": 0,
-            "gi": 0,
-            "ve": 0,
-            "sa": 0,
-            "do": 0
-          },
-          "prodMediaAttuale": {
-            "lu": 11,
-            "ma": 9,
-            "me": 4,
-            "gi": 9,
-            "ve": 6,
-            "sa": 9,
-            "do": 12
-          }
-        },
-        {
-          "name": "TARTELLETTA Pistacchio",
-          "scarto": {
-            "lu": 0,
-            "ma": 0,
-            "me": 0,
-            "gi": 0,
-            "ve": 0,
-            "sa": 0,
-            "do": 0
-          },
-          "prodMediaAttuale": {
-            "lu": 7,
-            "ma": 2,
-            "me": 2,
-            "gi": 4,
-            "ve": 2,
-            "sa": 2,
-            "do": 4
-          }
-        }
       ]
     },
     "kpi": {
-      "tot_ord": 2118,
-      "tot_sc": 262,
-      "pct_spreco": 12.4,
-      "risparmio": 262
+      "tot_ord": 1723,
+      "tot_sc": 250,
+      "pct_spreco": 14.5,
+      "risparmio": 250
     }
   },
   "Bacan": {
     "categories": {
-      "BISCOTTI": [
-        {
-          "name": "BISCOTTI MONTATI",
-          "scarto": {
-            "lu": 0,
-            "ma": 0,
-            "me": 0,
-            "gi": 0,
-            "ve": 0,
-            "sa": 0,
-            "do": 0
-          },
-          "prodMediaAttuale": {
-            "lu": 0,
-            "ma": 30,
-            "me": 0,
-            "gi": 0,
-            "ve": 0,
-            "sa": 0,
-            "do": 0
-          }
-        }
-      ],
-      "PANE": [
-        {
-          "name": "BUN BURGER",
-          "scarto": {
-            "lu": 0,
-            "ma": 0,
-            "me": 0,
-            "gi": 0,
-            "ve": 0,
-            "sa": 0,
-            "do": 0
-          },
-          "prodMediaAttuale": {
-            "lu": 0,
-            "ma": 3,
-            "me": 0,
-            "gi": 3,
-            "ve": 0,
-            "sa": 15,
-            "do": 8
-          }
-        },
-        {
-          "name": "FILONE 500 Gr. Circa",
-          "scarto": {
-            "lu": 0,
-            "ma": 0,
-            "me": 0,
-            "gi": 0,
-            "ve": 0,
-            "sa": 0,
-            "do": 0
-          },
-          "prodMediaAttuale": {
-            "lu": 0,
-            "ma": 0,
-            "me": 0,
-            "gi": 0,
-            "ve": 0,
-            "sa": 2,
-            "do": 2
-          }
-        },
-        {
-          "name": "FOCACCIA Gusti Vari",
-          "scarto": {
-            "lu": 0,
-            "ma": 0,
-            "me": 0,
-            "gi": 0,
-            "ve": 0,
-            "sa": 0,
-            "do": 0
-          },
-          "prodMediaAttuale": {
-            "lu": 0,
-            "ma": 0,
-            "me": 0,
-            "gi": 0,
-            "ve": 0,
-            "sa": 2,
-            "do": 0
-          }
-        },
-        {
-          "name": "PAN BAULETTO 600 Gr. Circa",
-          "scarto": {
-            "lu": 0,
-            "ma": 0,
-            "me": 0,
-            "gi": 0,
-            "ve": 0,
-            "sa": 0,
-            "do": 0
-          },
-          "prodMediaAttuale": {
-            "lu": 2,
-            "ma": 0,
-            "me": 0,
-            "gi": 0,
-            "ve": 0,
-            "sa": 0,
-            "do": 0
-          }
-        }
-      ],
       "PASTE": [
         {
           "name": "CANNONCINO Crema",
@@ -1347,29 +901,6 @@
           }
         }
       ],
-      "PREPARAZIONI": [
-        {
-          "name": "CRUMBLE 1 Kg Circa",
-          "scarto": {
-            "lu": 0,
-            "ma": 0,
-            "me": 0,
-            "gi": 0,
-            "ve": 0,
-            "sa": 0,
-            "do": 0
-          },
-          "prodMediaAttuale": {
-            "lu": 0,
-            "ma": 0,
-            "me": 0,
-            "gi": 0,
-            "ve": 0,
-            "sa": 0,
-            "do": 0
-          }
-        }
-      ],
       "SALATO": [
         {
           "name": "HOT DOG Mini",
@@ -1455,56 +986,12 @@
             "do": 0
           }
         }
-      ],
-      "MONOPORZIONE": [
-        {
-          "name": "Monop. CAPRESE",
-          "scarto": {
-            "lu": 0,
-            "ma": 0,
-            "me": 0,
-            "gi": 0,
-            "ve": 0,
-            "sa": 0,
-            "do": 0
-          },
-          "prodMediaAttuale": {
-            "lu": 10,
-            "ma": 0,
-            "me": 0,
-            "gi": 0,
-            "ve": 0,
-            "sa": 0,
-            "do": 0
-          }
-        },
-        {
-          "name": "Monop. CHEESECAKE",
-          "scarto": {
-            "lu": 0,
-            "ma": 0,
-            "me": 0,
-            "gi": 0,
-            "ve": 0,
-            "sa": 0,
-            "do": 0
-          },
-          "prodMediaAttuale": {
-            "lu": 10,
-            "ma": 0,
-            "me": 0,
-            "gi": 5,
-            "ve": 0,
-            "sa": 0,
-            "do": 0
-          }
-        }
       ]
     },
     "kpi": {
-      "tot_ord": 389,
+      "tot_ord": 297,
       "tot_sc": 43,
-      "pct_spreco": 11.1,
+      "pct_spreco": 14.5,
       "risparmio": 43
     }
   }
@@ -1607,13 +1094,15 @@
                     const isModified = pianificazione[key] !== undefined && pianificazione[key] !== prodConsigliato;
 
                     html += '<td><div class="day-content">';
-                    html += '<span class="scarto-storico ' + scartoClass + '">';
-                    html += (scarto === 0 ? '&#10003; ' : '') + scarto + '</span>';
-                    html += '<span class="suggestion ' + suggClass + '">' + suggText + '</span>';
                     html += '<input type="number" class="prod-input' + (isModified ? ' modified' : '') + '" ';
                     html += 'data-key="' + key + '" data-original="' + prodConsigliato + '" ';
                     html += 'data-day="' + day + '" value="' + valore + '" min="0" ';
                     html += 'oninput="updatePlanification(this)">';
+                    html += '<div class="badge-group">';
+                    html += '<span class="scarto-storico ' + scartoClass + '">';
+                    html += (scarto === 0 ? '&#10003;' : '-' + scarto) + '</span>';
+                    html += '<span class="suggestion ' + suggClass + '">' + suggText + '</span>';
+                    html += '</div>';
                     html += '</div></td>';
                 });
 
