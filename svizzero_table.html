@@ -4,181 +4,1141 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
-    <title>Storico Prodotti - Gruppo Rimani</title>
+    <title>Piano Produzione - Gruppo Rimani</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            background: #f5f7fa;
+            color: #2d3748;
+        }
+
+        .header {
+            background: white;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .header-left { display: flex; align-items: center; gap: 15px; }
+        .header-left img { height: 45px; border-radius: 50%; }
+        .header h1 { font-size: 1.5em; font-weight: 600; color: #1a202c; }
+        .breadcrumb { font-size: 0.85em; color: #718096; margin-bottom: 3px; }
+
+        .location-filter { display: flex; gap: 10px; }
+        .location-btn {
+            padding: 8px 22px; font-size: 0.95em; font-weight: 500;
+            border: 1px solid #e2e8f0; background: white; color: #4a5568;
+            cursor: pointer; border-radius: 6px; transition: all 0.2s ease;
+        }
+        .location-btn:hover { background: #f7fafc; border-color: #cbd5e0; }
+        .location-btn.active { background: #4299e1; color: white; border-color: #4299e1; }
+
+        .container { max-width: 1600px; margin: 0 auto; padding: 25px 40px 120px; }
+
+        /* KPI */
+        .kpi-row {
+            display: grid; grid-template-columns: repeat(4, 1fr);
+            gap: 15px; margin-bottom: 20px;
+        }
+        .kpi-card {
+            background: white; border-radius: 8px; padding: 18px 22px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            border-left: 4px solid #e2e8f0;
+        }
+        .kpi-card.blue { border-left-color: #4299e1; }
+        .kpi-card.red { border-left-color: #e53e3e; }
+        .kpi-card.yellow { border-left-color: #d69e2e; }
+        .kpi-card.green { border-left-color: #38a169; }
+        .kpi-label { font-size: 0.75em; color: #718096; text-transform: uppercase; letter-spacing: 0.5px; }
+        .kpi-value { font-size: 2em; font-weight: 700; margin: 4px 0; }
+        .kpi-card.blue .kpi-value { color: #4299e1; }
+        .kpi-card.red .kpi-value { color: #e53e3e; }
+        .kpi-card.yellow .kpi-value { color: #d69e2e; }
+        .kpi-card.green .kpi-value { color: #38a169; }
+        .kpi-sub { font-size: 0.75em; color: #a0aec0; }
+
+        /* INFO + LEGENDA */
+        .info-box {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 20px; min-height: 100vh;
+            color: white; padding: 20px 25px; border-radius: 8px;
+            margin-bottom: 15px; box-shadow: 0 4px 15px rgba(102,126,234,0.3);
         }
-        .container { max-width: 1400px; margin: 0 auto; }
-        .page-header {
-            display: flex; align-items: center; justify-content: center;
-            gap: 20px; margin-bottom: 8px;
+        .info-box h2 { font-size: 1.1em; margin-bottom: 8px; }
+        .info-box p { font-size: 0.9em; opacity: 0.95; line-height: 1.6; }
+
+        .legend {
+            background: white; padding: 15px 25px; border-radius: 8px;
+            margin-bottom: 15px; box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            display: flex; gap: 25px; align-items: center; flex-wrap: wrap;
         }
-        .page-header img { height: 70px; width: auto; filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3)); }
-        .page-header h1 {
-            color: white; font-size: 2.2em;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        .legend-title { font-weight: 600; color: #2d3748; }
+        .legend-item { display: flex; align-items: center; gap: 6px; font-size: 0.85em; color: #4a5568; }
+        .legend-dot {
+            width: 12px; height: 12px; border-radius: 3px; display: inline-block;
         }
-        .data-aggiornamento {
-            text-align: center; color: rgba(255,255,255,0.7);
-            font-size: 0.85em; margin-bottom: 25px;
+
+        /* PERIODO */
+        .periodo-box {
+            background: white; padding: 15px 25px; border-radius: 8px;
+            margin-bottom: 15px; box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            display: flex; justify-content: space-between; align-items: center;
         }
-        .tabs { display: flex; justify-content: center; gap: 8px; margin-bottom: 25px; }
-        .tab-btn {
-            padding: 12px 35px; border: 2px solid rgba(255,255,255,0.5);
-            border-radius: 10px 10px 0 0; background: rgba(255,255,255,0.15);
-            color: white; font-size: 1.15em; font-weight: 600; cursor: pointer;
-            transition: all 0.3s; backdrop-filter: blur(5px);
+        .periodo-box .label { font-size: 0.8em; color: #718096; text-transform: uppercase; letter-spacing: 0.5px; }
+        .periodo-box .value { font-weight: 600; color: #2d3748; margin-top: 3px; }
+        .periodo-box .agg { font-size: 0.8em; color: #a0aec0; }
+
+        /* TABELLA */
+        .table-section {
+            background: white; border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08); overflow: hidden;
         }
-        .tab-btn:hover { background: rgba(255,255,255,0.3); }
-        .tab-btn.active {
-            background: white; color: #667eea; border-color: white;
-            transform: translateY(2px);
-        }
-        .locale-section { display: none; }
-        .locale-section.active { display: block; }
-        .locale-section {
-            background: white; border-radius: 0 15px 15px 15px; padding: 30px;
-            margin-bottom: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-        .locale-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white; padding: 20px; border-radius: 10px; margin-bottom: 20px;
-            display: flex; align-items: center; gap: 15px;
-        }
-        .locale-header img {
-            height: 50px; width: auto;
-            filter: brightness(0) invert(1) drop-shadow(1px 1px 2px rgba(0,0,0,0.3));
-        }
-        .locale-header-text h2 { font-size: 1.8em; }
-        .locale-header-text .periodo { font-size: 0.85em; opacity: 0.9; }
-        table {
-            width: 100%; border-collapse: collapse; margin-top: 15px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        thead {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-        }
+        table { width: 100%; border-collapse: collapse; }
+        thead { background: #f7fafc; border-bottom: 2px solid #e2e8f0; }
         th {
-            padding: 15px; text-align: center; font-weight: 600;
-            font-size: 1.1em; position: sticky; top: 0;
+            padding: 14px 12px; text-align: center; font-weight: 600;
+            font-size: 0.78em; color: #4a5568; text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
-        th:first-child { text-align: left; padding-left: 20px; }
-        td {
-            padding: 12px 15px; border-bottom: 1px solid #e0e0e0;
-            text-align: center;
-        }
+        th:first-child { text-align: left; padding-left: 25px; width: 22%; }
+
+        tbody tr { border-bottom: 1px solid #f1f5f9; transition: background 0.15s; }
+        tbody tr:hover { background: #f8fafc; }
+        td { padding: 0; text-align: center; vertical-align: middle; }
         td:first-child {
-            text-align: left; font-weight: 500; padding-left: 20px; color: #333;
+            padding: 16px 12px 16px 25px; text-align: left;
+            font-weight: 500; color: #2d3748; font-size: 0.9em;
         }
-        tbody tr:hover { background-color: #f5f5f5; transition: background-color 0.2s; }
-        .totale-row {
-            background-color: #667eea !important; color: white;
-            font-weight: bold; font-size: 1.1em;
+
+        .day-content {
+            display: flex; flex-direction: column; align-items: center;
+            gap: 5px; padding: 10px 6px;
         }
-        .totale-row td { border-bottom: none; padding: 15px; }
-        .zero { color: #ccc; }
-        @media print {
-            body { background: white; }
-            .locale-section { display: block !important; page-break-inside: avoid; box-shadow: none; border: 1px solid #ddd; }
-            .tabs { display: none; }
+
+        .scarto-storico {
+            display: inline-flex; align-items: center; gap: 3px;
+            padding: 3px 8px; border-radius: 4px;
+            font-size: 0.78em; font-weight: 600;
+            background: #fed7d7; color: #c53030;
         }
-        @media (max-width: 768px) {
-            .page-header h1 { font-size: 1.5em; }
-            .page-header img { height: 45px; }
-            .locale-section { padding: 15px; }
-            table { font-size: 0.85em; }
-            th, td { padding: 8px 5px; }
+        .scarto-storico.zero { background: #c6f6d5; color: #22543d; }
+        .scarto-storico.low { background: #fefcbf; color: #744210; }
+
+        .suggestion {
+            font-size: 0.7em; font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px;
+        }
+        .suggestion.reduce { color: #e53e3e; }
+        .suggestion.increase { color: #38a169; }
+        .suggestion.perfect { color: #22543d; }
+
+        .prod-input {
+            width: 60px; padding: 7px 8px; text-align: center;
+            border: 2px solid #e2e8f0; border-radius: 6px;
+            font-size: 1em; font-weight: 600; color: #2d3748;
+            background: white; transition: all 0.2s;
+        }
+        .prod-input:focus {
+            outline: none; border-color: #4299e1; background: white;
+            box-shadow: 0 0 0 3px rgba(66,153,225,0.15);
+        }
+        .prod-input.modified { border-color: #ed8936; background: #fffaf0; }
+
+        .category-header {
+            background: #edf2f7 !important;
+            font-weight: 600; color: #e53e3e !important;
+            text-transform: uppercase; letter-spacing: 0.5px; font-size: 0.85em;
+        }
+        .category-header td { padding: 10px 25px !important; }
+
+        tfoot { background: #f7fafc; border-top: 2px solid #e2e8f0; font-weight: 600; }
+        tfoot td { padding: 16px 12px; color: #2d3748; font-size: 1em; }
+        .total-value { text-align: center; font-weight: 700; font-size: 1.1em; }
+
+        /* TOOLBAR */
+        #toolbar {
+            position: fixed; bottom: 0; left: 0; right: 0;
+            background: white; padding: 12px 30px;
+            border-top: 1px solid #e2e8f0;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+            display: flex; justify-content: center; gap: 15px; align-items: center;
+            z-index: 100;
+        }
+        #toolbar button {
+            padding: 10px 25px; border: none; border-radius: 8px;
+            font-size: 0.95em; font-weight: 600; cursor: pointer; transition: all 0.2s;
+        }
+        #btn-pubblica { background: #38a169; color: white; }
+        #btn-pubblica:hover { background: #2f855a; transform: scale(1.02); }
+        #btn-pubblica:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+        #btn-reset { background: #e2e8f0; color: #4a5568; }
+        #btn-reset:hover { background: #cbd5e0; }
+        #status { font-size: 0.85em; color: #718096; }
+
+        @media (max-width: 900px) {
+            .kpi-row { grid-template-columns: repeat(2, 1fr); }
+            .container { padding: 15px 15px 120px; }
+            .header { padding: 15px 20px; }
+            th, td { padding: 8px 5px; font-size: 0.8em; }
+            .prod-input { width: 45px; padding: 5px; font-size: 0.9em; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="page-header" id="page-header">
+    <div class="header">
+        <div class="header-left">
             <img id="header-logo" src="svizzero_logo.svg" alt="Logo">
-            <h1 id="page-title">Ordini Svizzero</h1>
-        </div>
-        <div class="data-aggiornamento">Aggiornato il 15/02/2026 alle 20:12</div>
-        <div class="tabs">
-            <button class="tab-btn active" onclick="switchTab('Svizzero')">Svizzero</button>
-            <button class="tab-btn" onclick="switchTab('Bacan')">Bacan</button>
-        </div>
-
-        <div class="locale-section active" data-locale="Svizzero" data-logo="svizzero_logo.svg">
-            <div class="locale-header">
-                <img src="svizzero_logo.svg" alt="Svizzero">
-                <div class="locale-header-text">
-                    <h2>Svizzero</h2>
-                    <div class="periodo">Periodo: 02/02/2026 - 15/02/2026 | Media su 2 settimane</div>
-                </div>
+            <div>
+                <div class="breadcrumb">dashboard / piano-produzione</div>
+                <h1 id="page-title">Piano Produzione - Svizzero</h1>
             </div>
-            <table>
-                <thead><tr><th>Prodotto</th>
-<th>LU</th><th>MA</th><th>ME</th><th>GI</th><th>VE</th><th>SA</th><th>DO</th></tr></thead><tbody>
-<tr><td>CANNONCINO Crema</td><td class="">18</td><td class="">14</td><td class="">15</td><td class="">12</td><td class="">10</td><td class="">11</td><td class="">12</td></tr>
-<tr><td>CROISSANT Farcito</td><td class="">66</td><td class="">56</td><td class="">43</td><td class="">47</td><td class="">55</td><td class="">72</td><td class="">75</td></tr>
-<tr><td>CROISSANT Tiramisù</td><td class="">6</td><td class="">6</td><td class="">4</td><td class="">6</td><td class="">6</td><td class="">10</td><td class="">12</td></tr>
-<tr><td>CROISSANT Vuoto</td><td class="">15</td><td class="">10</td><td class="">9</td><td class="">12</td><td class="">11</td><td class="">10</td><td class="">12</td></tr>
-<tr><td>CROISSANT integrale</td><td class="">6</td><td class="">4</td><td class="">2</td><td class="">8</td><td class="">9</td><td class="">7</td><td class="">16</td></tr>
-<tr><td>CROISSANT vegano</td><td class="">8</td><td class="">6</td><td class="">6</td><td class="">7</td><td class="">8</td><td class="">7</td><td class="">8</td></tr>
-<tr><td>CRUFFIN</td><td class="">14</td><td class="">10</td><td class="">7</td><td class="">8</td><td class="">9</td><td class="">9</td><td class="">10</td></tr>
-<tr><td>DANESE Ai Frutti Rossi</td><td class="">15</td><td class="">18</td><td class="">14</td><td class="">14</td><td class="">14</td><td class="">18</td><td class="">20</td></tr>
-<tr><td>GIRELLA</td><td class="">8</td><td class="">8</td><td class="">8</td><td class="">6</td><td class="">6</td><td class="">10</td><td class="">13</td></tr>
-<tr><td>PAIN AU CHOCOLAT</td><td class="">20</td><td class="">20</td><td class="">15</td><td class="">16</td><td class="">20</td><td class="">22</td><td class="">21</td></tr>
-<tr><td>VENEZIANA</td><td class="">8</td><td class="">10</td><td class="">5</td><td class="">10</td><td class="">9</td><td class="">10</td><td class="">10</td></tr>
-<tr><td>VENEZIANA Farcita</td><td class="">22</td><td class="">20</td><td class="">28</td><td class="">26</td><td class="">23</td><td class="">38</td><td class="">36</td></tr>
-<tr><td>VENEZIANA Gocce di Cioccolato</td><td class="">9</td><td class="">12</td><td class="">12</td><td class="">12</td><td class="">11</td><td class="">16</td><td class="">16</td></tr>
-<tr><td>PIZZETTA DELIZIA</td><td class="">11</td><td class="">6</td><td class="">8</td><td class="">8</td><td class="">10</td><td class="">10</td><td class="">15</td></tr>
-<tr><td>PIZZETTA NAPOLI</td><td class="">10</td><td class="">10</td><td class="">6</td><td class="">8</td><td class="">8</td><td class="">10</td><td class="">10</td></tr>
-<tr><td>PIZZETTA SFOGLIA</td><td class="">20</td><td class="">22</td><td class="">25</td><td class="">24</td><td class="">28</td><td class="">26</td><td class="">26</td></tr>
-<tr><td>SFOGLIA Prosc. e Formaggio</td><td class="">7</td><td class="">6</td><td class="">8</td><td class="">8</td><td class="">8</td><td class="">10</td><td class="">12</td></tr>
-<tr><td>IMPASTO Zeppole</td><td class="">5</td><td class="">5</td><td class="">5</td><td class="">5</td><td class="">5</td><td class="">6</td><td class="">6</td></tr>
-<tr class="totale-row"><td>TOTALE</td><td>268</td><td>243</td><td>220</td><td>237</td><td>250</td><td>302</td><td>330</td></tr></tbody></table></div>
-
-        <div class="locale-section" data-locale="Bacan" data-logo="bacan_logo.svg">
-            <div class="locale-header">
-                <img src="bacan_logo.svg" alt="Bacan">
-                <div class="locale-header-text">
-                    <h2>Bacan</h2>
-                    <div class="periodo">Periodo: 02/02/2026 - 15/02/2026 | Media su 2 settimane</div>
-                </div>
-            </div>
-            <table>
-                <thead><tr><th>Prodotto</th>
-<th>LU</th><th>MA</th><th>ME</th><th>GI</th><th>VE</th><th>SA</th><th>DO</th></tr></thead><tbody>
-<tr><td>CANNONCINO Crema</td><td class="">3</td><td class="">3</td><td class="">3</td><td class="">3</td><td class="">3</td><td class="">4</td><td class="">4</td></tr>
-<tr><td>CROISSANT Tiramisù</td><td class="">1</td><td class="">1</td><td class="zero">-</td><td class="">1</td><td class="">1</td><td class="">1</td><td class="">1</td></tr>
-<tr><td>CROISSANT Vuoto</td><td class="">2</td><td class="">2</td><td class="">2</td><td class="">2</td><td class="">2</td><td class="">3</td><td class="">4</td></tr>
-<tr><td>CROISSANT vegano</td><td class="">2</td><td class="">2</td><td class="">2</td><td class="">2</td><td class="">2</td><td class="">2</td><td class="">2</td></tr>
-<tr><td>CRUFFIN</td><td class="">1</td><td class="">1</td><td class="">1</td><td class="">1</td><td class="">1</td><td class="">2</td><td class="">2</td></tr>
-<tr><td>DANESE Ai Frutti Rossi</td><td class="">1</td><td class="">1</td><td class="">1</td><td class="">1</td><td class="">1</td><td class="">2</td><td class="">2</td></tr>
-<tr><td>GIRELLA</td><td class="">1</td><td class="">1</td><td class="">1</td><td class="">2</td><td class="">1</td><td class="">2</td><td class="">2</td></tr>
-<tr><td>PAIN AU CHOCOLAT</td><td class="">3</td><td class="">2</td><td class="">2</td><td class="">2</td><td class="">2</td><td class="">3</td><td class="">4</td></tr>
-<tr><td>VENEZIANA</td><td class="">1</td><td class="">1</td><td class="">1</td><td class="">1</td><td class="">1</td><td class="">3</td><td class="">2</td></tr>
-<tr><td>PIZZETTA SFOGLIA</td><td class="">2</td><td class="">2</td><td class="">2</td><td class="">2</td><td class="">2</td><td class="">3</td><td class="">3</td></tr>
-<tr><td>PIZZETTA SFOGLIE Mini</td><td class="zero">-</td><td class="zero">-</td><td class="zero">-</td><td class="zero">-</td><td class="zero">-</td><td class="">-</td><td class="zero">-</td></tr>
-<tr class="totale-row"><td>TOTALE</td><td>17</td><td>16</td><td>15</td><td>17</td><td>16</td><td>-25</td><td>26</td></tr></tbody></table></div>
+        </div>
+        <div class="location-filter" id="locationFilter">
+            <button class="location-btn active" data-locale="Svizzero" onclick="changeLocation('Svizzero', this)">SVIZZERO</button>
+            <button class="location-btn" data-locale="Bacan" onclick="changeLocation('Bacan', this)">BACAN</button>
+        </div>
     </div>
+
+    <div class="container">
+        <div class="kpi-row" id="kpiRow"></div>
+
+        <div class="info-box">
+            <h2>Come leggere la tabella</h2>
+            <p>
+                <strong>SCARTO MEDIO:</strong> Media degli scarti per giorno nelle ultime 2 settimane<br>
+                <strong>CONSIGLIO:</strong> Suggerimento automatico basato sugli scarti<br>
+                <strong>DA PRODURRE:</strong> Quantita' pianificata (modificabile, precompilata con il suggerito)
+            </p>
+        </div>
+
+        <div class="legend">
+            <span class="legend-title">Legenda:</span>
+            <div class="legend-item"><span class="legend-dot" style="background:#fed7d7;"></span> Scarto alto (&gt;2 pz)</div>
+            <div class="legend-item"><span class="legend-dot" style="background:#fefcbf;"></span> Scarto basso (1-2 pz)</div>
+            <div class="legend-item"><span class="legend-dot" style="background:#c6f6d5;"></span> Zero scarti</div>
+            <div class="legend-item"><span class="legend-dot" style="background:#fffaf0;border:2px solid #ed8936;"></span> Valore modificato</div>
+        </div>
+
+        <div class="periodo-box">
+            <div>
+                <div class="label">Dati basati sul periodo</div>
+                <div class="value">02/02/2026 - 15/02/2026</div>
+            </div>
+            <div class="agg">Aggiornato il 16/02/2026 alle 07:43</div>
+        </div>
+
+        <div class="table-section">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Prodotto</th>
+                        <th>LUN</th><th>MAR</th><th>MER</th><th>GIO</th>
+                        <th>VEN</th><th>SAB</th><th>DOM</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody"></tbody>
+                <tfoot>
+                    <tr>
+                        <td style="padding-left:25px">TOTALE PIANIFICATO</td>
+                        <td class="total-value" id="totLU">0</td>
+                        <td class="total-value" id="totMA">0</td>
+                        <td class="total-value" id="totME">0</td>
+                        <td class="total-value" id="totGI">0</td>
+                        <td class="total-value" id="totVE">0</td>
+                        <td class="total-value" id="totSA">0</td>
+                        <td class="total-value" id="totDO">0</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+
+    <div id="toolbar" style="display:none">
+        <span id="status">Modifica le quantita' e pubblica quando pronto</span>
+        <button id="btn-reset" onclick="resetModifiche()">Reset Modifiche</button>
+        <button id="btn-pubblica" onclick="pubblica()">Conferma e Pubblica</button>
+    </div>
+
     <script>
-    function switchTab(locale) {
-        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-        document.querySelectorAll('.locale-section').forEach(s => s.classList.remove('active'));
-        document.querySelectorAll('.tab-btn').forEach(b => {
-            if (b.textContent.trim() === locale) b.classList.add('active');
+    // ===== DATI DAL DATABASE =====
+    const datiLocali = {
+  "Svizzero": {
+    "categories": {
+      "PASTE": [
+        {
+          "name": "CANNONCINO Crema",
+          "scarto": {
+            "lu": 0,
+            "ma": 2,
+            "me": 0,
+            "gi": 0,
+            "ve": 2,
+            "sa": 2,
+            "do": 0
+          },
+          "prodMediaAttuale": {
+            "lu": 18,
+            "ma": 14,
+            "me": 15,
+            "gi": 12,
+            "ve": 10,
+            "sa": 6,
+            "do": 12
+          }
+        },
+        {
+          "name": "CROISSANT Farcito",
+          "scarto": {
+            "lu": 0,
+            "ma": 17,
+            "me": 0,
+            "gi": 8,
+            "ve": 16,
+            "sa": 12,
+            "do": 4
+          },
+          "prodMediaAttuale": {
+            "lu": 66,
+            "ma": 66,
+            "me": 43,
+            "gi": 47,
+            "ve": 66,
+            "sa": 72,
+            "do": 74
+          }
+        },
+        {
+          "name": "CROISSANT Vuoto",
+          "scarto": {
+            "lu": 0,
+            "ma": 0,
+            "me": 0,
+            "gi": 0,
+            "ve": 4,
+            "sa": 0,
+            "do": 0
+          },
+          "prodMediaAttuale": {
+            "lu": 15,
+            "ma": 10,
+            "me": 9,
+            "gi": 12,
+            "ve": 11,
+            "sa": 10,
+            "do": 12
+          }
+        },
+        {
+          "name": "CROISSANT integrale",
+          "scarto": {
+            "lu": 0,
+            "ma": 2,
+            "me": 0,
+            "gi": 2,
+            "ve": 6,
+            "sa": 0,
+            "do": 5
+          },
+          "prodMediaAttuale": {
+            "lu": 2,
+            "ma": 6,
+            "me": 2,
+            "gi": 8,
+            "ve": 9,
+            "sa": 7,
+            "do": 16
+          }
+        },
+        {
+          "name": "CROISSANT vegano",
+          "scarto": {
+            "lu": 0,
+            "ma": 0,
+            "me": 0,
+            "gi": 2,
+            "ve": 0,
+            "sa": 1,
+            "do": 1
+          },
+          "prodMediaAttuale": {
+            "lu": 4,
+            "ma": 6,
+            "me": 6,
+            "gi": 7,
+            "ve": 8,
+            "sa": 7,
+            "do": 8
+          }
+        },
+        {
+          "name": "CRUFFIN",
+          "scarto": {
+            "lu": 2,
+            "ma": 3,
+            "me": 0,
+            "gi": 0,
+            "ve": 0,
+            "sa": 0,
+            "do": 0
+          },
+          "prodMediaAttuale": {
+            "lu": 14,
+            "ma": 10,
+            "me": 7,
+            "gi": 8,
+            "ve": 9,
+            "sa": 9,
+            "do": 10
+          }
+        },
+        {
+          "name": "DANESE Ai Frutti Rossi",
+          "scarto": {
+            "lu": 0,
+            "ma": 8,
+            "me": 1,
+            "gi": 2,
+            "ve": 0,
+            "sa": 0,
+            "do": 2
+          },
+          "prodMediaAttuale": {
+            "lu": 10,
+            "ma": 20,
+            "me": 14,
+            "gi": 14,
+            "ve": 14,
+            "sa": 18,
+            "do": 20
+          }
+        },
+        {
+          "name": "GIRELLA",
+          "scarto": {
+            "lu": 0,
+            "ma": 8,
+            "me": 2,
+            "gi": 3,
+            "ve": 1,
+            "sa": 0,
+            "do": 0
+          },
+          "prodMediaAttuale": {
+            "lu": 8,
+            "ma": 10,
+            "me": 8,
+            "gi": 6,
+            "ve": 6,
+            "sa": 10,
+            "do": 13
+          }
+        },
+        {
+          "name": "MINI CROISSANT Crema",
+          "scarto": {
+            "lu": 0,
+            "ma": 3,
+            "me": 0,
+            "gi": 0,
+            "ve": 0,
+            "sa": 0,
+            "do": 0
+          },
+          "prodMediaAttuale": {
+            "lu": 0,
+            "ma": 0,
+            "me": 0,
+            "gi": 0,
+            "ve": 0,
+            "sa": 0,
+            "do": 0
+          }
+        },
+        {
+          "name": "MINI CROISSANT Vuoto",
+          "scarto": {
+            "lu": 0,
+            "ma": 14,
+            "me": 0,
+            "gi": 0,
+            "ve": 0,
+            "sa": 0,
+            "do": 0
+          },
+          "prodMediaAttuale": {
+            "lu": 0,
+            "ma": 8,
+            "me": 0,
+            "gi": 0,
+            "ve": 0,
+            "sa": 0,
+            "do": 0
+          }
+        },
+        {
+          "name": "PAIN AU CHOCOLAT",
+          "scarto": {
+            "lu": 2,
+            "ma": 6,
+            "me": 0,
+            "gi": 2,
+            "ve": 4,
+            "sa": 0,
+            "do": 0
+          },
+          "prodMediaAttuale": {
+            "lu": 20,
+            "ma": 20,
+            "me": 15,
+            "gi": 16,
+            "ve": 20,
+            "sa": 22,
+            "do": 21
+          }
+        },
+        {
+          "name": "VENEZIANA",
+          "scarto": {
+            "lu": 0,
+            "ma": 6,
+            "me": 0,
+            "gi": 4,
+            "ve": 4,
+            "sa": 1,
+            "do": 0
+          },
+          "prodMediaAttuale": {
+            "lu": 8,
+            "ma": 10,
+            "me": 5,
+            "gi": 10,
+            "ve": 9,
+            "sa": 10,
+            "do": 10
+          }
+        },
+        {
+          "name": "VENEZIANA Farcita",
+          "scarto": {
+            "lu": 0,
+            "ma": 12,
+            "me": 2,
+            "gi": 2,
+            "ve": 6,
+            "sa": 4,
+            "do": 0
+          },
+          "prodMediaAttuale": {
+            "lu": 22,
+            "ma": 26,
+            "me": 28,
+            "gi": 26,
+            "ve": 23,
+            "sa": 38,
+            "do": 36
+          }
+        },
+        {
+          "name": "VENEZIANA Gocce di Cioccolato",
+          "scarto": {
+            "lu": 1,
+            "ma": 9,
+            "me": 2,
+            "gi": 4,
+            "ve": 2,
+            "sa": 2,
+            "do": 1
+          },
+          "prodMediaAttuale": {
+            "lu": 9,
+            "ma": 12,
+            "me": 12,
+            "gi": 12,
+            "ve": 11,
+            "sa": 16,
+            "do": 16
+          }
+        }
+      ],
+      "ALTRO": [
+        {
+          "name": "CROISSANT Tiramisù",
+          "scarto": {
+            "lu": 0,
+            "ma": 2,
+            "me": 0,
+            "gi": 0,
+            "ve": 0,
+            "sa": 0,
+            "do": 0
+          },
+          "prodMediaAttuale": {
+            "lu": 6,
+            "ma": 6,
+            "me": 3,
+            "gi": 0,
+            "ve": 0,
+            "sa": 0,
+            "do": 6
+          }
+        }
+      ],
+      "PANE": [
+        {
+          "name": "FOCACCIA",
+          "scarto": {
+            "lu": 0,
+            "ma": 0,
+            "me": 0,
+            "gi": 2,
+            "ve": 1,
+            "sa": 1,
+            "do": 0
+          },
+          "prodMediaAttuale": {
+            "lu": 0,
+            "ma": 2,
+            "me": 0,
+            "gi": 0,
+            "ve": 0,
+            "sa": 1,
+            "do": 1
+          }
+        },
+        {
+          "name": "FOCACCIA Gusti Vari",
+          "scarto": {
+            "lu": 0,
+            "ma": 8,
+            "me": 0,
+            "gi": 0,
+            "ve": 0,
+            "sa": 0,
+            "do": 0
+          },
+          "prodMediaAttuale": {
+            "lu": 6,
+            "ma": 0,
+            "me": 6,
+            "gi": 0,
+            "ve": 0,
+            "sa": 0,
+            "do": 0
+          }
+        }
+      ],
+      "SALATO": [
+        {
+          "name": "PIZZETTA NAPOLI",
+          "scarto": {
+            "lu": 2,
+            "ma": 2,
+            "me": 0,
+            "gi": 2,
+            "ve": 0,
+            "sa": 1,
+            "do": 3
+          },
+          "prodMediaAttuale": {
+            "lu": 10,
+            "ma": 10,
+            "me": 6,
+            "gi": 8,
+            "ve": 8,
+            "sa": 10,
+            "do": 10
+          }
+        },
+        {
+          "name": "PIZZETTA SFOGLIA",
+          "scarto": {
+            "lu": 1,
+            "ma": 0,
+            "me": 0,
+            "gi": 4,
+            "ve": 0,
+            "sa": 8,
+            "do": 6
+          },
+          "prodMediaAttuale": {
+            "lu": 20,
+            "ma": 22,
+            "me": 25,
+            "gi": 24,
+            "ve": 28,
+            "sa": 26,
+            "do": 34
+          }
+        },
+        {
+          "name": "SFOGLIA Prosc. e Formaggio",
+          "scarto": {
+            "lu": 2,
+            "ma": 0,
+            "me": 6,
+            "gi": 0,
+            "ve": 0,
+            "sa": 0,
+            "do": 0
+          },
+          "prodMediaAttuale": {
+            "lu": 7,
+            "ma": 3,
+            "me": 4,
+            "gi": 0,
+            "ve": 0,
+            "sa": 0,
+            "do": 0
+          }
+        }
+      ]
+    },
+    "kpi": {
+      "tot_ord": 1717,
+      "tot_sc": 262,
+      "pct_spreco": 15.3,
+      "risparmio": 262
+    }
+  },
+  "Bacan": {
+    "categories": {
+      "PASTE": [
+        {
+          "name": "CANNONCINO Crema",
+          "scarto": {
+            "lu": 0,
+            "ma": 1,
+            "me": 0,
+            "gi": 0,
+            "ve": 0,
+            "sa": 1,
+            "do": 1
+          },
+          "prodMediaAttuale": {
+            "lu": 3,
+            "ma": 3,
+            "me": 3,
+            "gi": 2,
+            "ve": 3,
+            "sa": 2,
+            "do": 4
+          }
+        },
+        {
+          "name": "CROISSANT Vuoto",
+          "scarto": {
+            "lu": 1,
+            "ma": 2,
+            "me": 0,
+            "gi": 0,
+            "ve": 0,
+            "sa": 0,
+            "do": 1
+          },
+          "prodMediaAttuale": {
+            "lu": 2,
+            "ma": 2,
+            "me": 2,
+            "gi": 2,
+            "ve": 2,
+            "sa": 3,
+            "do": 4
+          }
+        },
+        {
+          "name": "CROISSANT vegano",
+          "scarto": {
+            "lu": 2,
+            "ma": 2,
+            "me": 0,
+            "gi": 0,
+            "ve": 0,
+            "sa": 0,
+            "do": 1
+          },
+          "prodMediaAttuale": {
+            "lu": 2,
+            "ma": 2,
+            "me": 2,
+            "gi": 2,
+            "ve": 2,
+            "sa": 2,
+            "do": 2
+          }
+        },
+        {
+          "name": "CRUFFIN",
+          "scarto": {
+            "lu": 1,
+            "ma": 1,
+            "me": 0,
+            "gi": 0,
+            "ve": 1,
+            "sa": 2,
+            "do": 0
+          },
+          "prodMediaAttuale": {
+            "lu": 1,
+            "ma": 1,
+            "me": 1,
+            "gi": 1,
+            "ve": 1,
+            "sa": 2,
+            "do": 2
+          }
+        },
+        {
+          "name": "DANESE Ai Frutti Rossi",
+          "scarto": {
+            "lu": 0,
+            "ma": 1,
+            "me": 0,
+            "gi": 0,
+            "ve": 1,
+            "sa": 1,
+            "do": 0
+          },
+          "prodMediaAttuale": {
+            "lu": 1,
+            "ma": 1,
+            "me": 1,
+            "gi": 1,
+            "ve": 1,
+            "sa": 2,
+            "do": 2
+          }
+        },
+        {
+          "name": "GIRELLA",
+          "scarto": {
+            "lu": 1,
+            "ma": 1,
+            "me": 1,
+            "gi": 0,
+            "ve": 1,
+            "sa": 2,
+            "do": 0
+          },
+          "prodMediaAttuale": {
+            "lu": 1,
+            "ma": 1,
+            "me": 1,
+            "gi": 2,
+            "ve": 1,
+            "sa": 2,
+            "do": 2
+          }
+        },
+        {
+          "name": "PAIN AU CHOCOLAT",
+          "scarto": {
+            "lu": 2,
+            "ma": 2,
+            "me": 0,
+            "gi": 0,
+            "ve": 2,
+            "sa": 3,
+            "do": 1
+          },
+          "prodMediaAttuale": {
+            "lu": 3,
+            "ma": 2,
+            "me": 2,
+            "gi": 2,
+            "ve": 2,
+            "sa": 4,
+            "do": 4
+          }
+        },
+        {
+          "name": "VENEZIANA",
+          "scarto": {
+            "lu": 0,
+            "ma": 1,
+            "me": 0,
+            "gi": 0,
+            "ve": 1,
+            "sa": 2,
+            "do": 2
+          },
+          "prodMediaAttuale": {
+            "lu": 1,
+            "ma": 1,
+            "me": 1,
+            "gi": 1,
+            "ve": 1,
+            "sa": 3,
+            "do": 2
+          }
+        }
+      ],
+      "ALTRO": [
+        {
+          "name": "CROISSANT Tiramisù",
+          "scarto": {
+            "lu": 0,
+            "ma": 1,
+            "me": 0,
+            "gi": 0,
+            "ve": 0,
+            "sa": 0,
+            "do": 0
+          },
+          "prodMediaAttuale": {
+            "lu": 1,
+            "ma": 1,
+            "me": 0,
+            "gi": 0,
+            "ve": 1,
+            "sa": 0,
+            "do": 1
+          }
+        }
+      ]
+    },
+    "kpi": {
+      "tot_ord": 112,
+      "tot_sc": 43,
+      "pct_spreco": 38.4,
+      "risparmio": 43
+    }
+  }
+};
+
+    const giorni = ['lu', 'ma', 'me', 'gi', 've', 'sa', 'do'];
+    const giorniLabel = ['LUN', 'MAR', 'MER', 'GIO', 'VEN', 'SAB', 'DOM'];
+    let currentLocation = 'Svizzero';
+    let pianificazione = {};
+
+    // ===== INIT =====
+    function init() {
+        loadSaved();
+        renderKPI();
+        renderTable();
+    }
+
+    // ===== CAMBIO LOCALE =====
+    function changeLocation(locale, btn) {
+        document.querySelectorAll('.location-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentLocation = locale;
+
+        // Aggiorna header
+        document.getElementById('page-title').textContent = 'Piano Produzione - ' + locale;
+        document.getElementById('header-logo').src = '/logo/' + locale.toLowerCase() + '_logo.svg';
+
+        loadSaved();
+        renderKPI();
+        renderTable();
+    }
+
+    // ===== KPI =====
+    function renderKPI() {
+        const data = datiLocali[currentLocation];
+        if (!data) return;
+        const kpi = data.kpi;
+
+        document.getElementById('kpiRow').innerHTML = `
+            <div class="kpi-card blue">
+                <div class="kpi-label">Ordinati / settimana</div>
+                <div class="kpi-value">${kpi.tot_ord}</div>
+                <div class="kpi-sub">media pezzi ordinati</div>
+            </div>
+            <div class="kpi-card red">
+                <div class="kpi-label">Scartati / settimana</div>
+                <div class="kpi-value">${kpi.tot_sc}</div>
+                <div class="kpi-sub">media pezzi sprecati</div>
+            </div>
+            <div class="kpi-card yellow">
+                <div class="kpi-label">% Spreco</div>
+                <div class="kpi-value">${kpi.pct_spreco}%</div>
+                <div class="kpi-sub">sul totale ordinato</div>
+            </div>
+            <div class="kpi-card green">
+                <div class="kpi-label">Risparmio possibile</div>
+                <div class="kpi-value">${kpi.risparmio}</div>
+                <div class="kpi-sub">pezzi/sett evitabili</div>
+            </div>
+        `;
+    }
+
+    // ===== TABELLA =====
+    function renderTable() {
+        const data = datiLocali[currentLocation];
+        if (!data) return;
+
+        const tbody = document.getElementById('tableBody');
+        tbody.innerHTML = '';
+
+        Object.keys(data.categories).forEach(category => {
+            // Header categoria
+            const catRow = document.createElement('tr');
+            catRow.classList.add('category-header');
+            catRow.innerHTML = '<td colspan="8">' + category + '</td>';
+            tbody.appendChild(catRow);
+
+            // Prodotti
+            data.categories[category].forEach((product, idx) => {
+                const tr = document.createElement('tr');
+                let html = '<td>' + product.name + '</td>';
+
+                giorni.forEach(day => {
+                    const scarto = product.scarto[day];
+                    const prodAttuale = product.prodMediaAttuale[day];
+                    const prodConsigliato = Math.max(0, prodAttuale - scarto);
+                    const scartoClass = scarto === 0 ? 'zero' : (scarto <= 2 ? 'low' : '');
+
+                    let suggText, suggClass;
+                    if (scarto === 0) {
+                        suggText = '&#10003; OK';
+                        suggClass = 'perfect';
+                    } else {
+                        suggText = '&#8595; -' + scarto;
+                        suggClass = 'reduce';
+                    }
+
+                    const key = currentLocation + '_' + category + '_' + idx + '_' + day;
+                    const valore = pianificazione[key] !== undefined ? pianificazione[key] : prodConsigliato;
+                    const isModified = pianificazione[key] !== undefined && pianificazione[key] !== prodConsigliato;
+
+                    html += '<td><div class="day-content">';
+                    html += '<span class="scarto-storico ' + scartoClass + '">';
+                    html += (scarto === 0 ? '&#10003; ' : '') + scarto + '</span>';
+                    html += '<span class="suggestion ' + suggClass + '">' + suggText + '</span>';
+                    html += '<input type="number" class="prod-input' + (isModified ? ' modified' : '') + '" ';
+                    html += 'data-key="' + key + '" data-original="' + prodConsigliato + '" ';
+                    html += 'data-day="' + day + '" value="' + valore + '" min="0" ';
+                    html += 'oninput="updatePlanification(this)">';
+                    html += '</div></td>';
+                });
+
+                tr.innerHTML = html;
+                tbody.appendChild(tr);
+            });
         });
-        const section = document.querySelector('.locale-section[data-locale="' + locale + '"]');
-        if (section) {
-            section.classList.add('active');
-            document.getElementById('header-logo').src = section.dataset.logo;
-            document.getElementById('page-title').textContent = 'Ordini ' + locale;
+
+        updateTotals();
+    }
+
+    // ===== AGGIORNAMENTO =====
+    function updatePlanification(input) {
+        const key = input.dataset.key;
+        const original = parseInt(input.dataset.original);
+        const value = parseInt(input.value) || 0;
+
+        pianificazione[key] = value;
+
+        if (value !== original) {
+            input.classList.add('modified');
+        } else {
+            input.classList.remove('modified');
+            delete pianificazione[key];
+        }
+
+        updateTotals();
+        updateStatus();
+        savePlanification();
+    }
+
+    function updateTotals() {
+        let totals = { lu: 0, ma: 0, me: 0, gi: 0, ve: 0, sa: 0, do: 0 };
+
+        document.querySelectorAll('.prod-input').forEach(input => {
+            const day = input.dataset.day;
+            totals[day] += parseInt(input.value) || 0;
+        });
+
+        giorni.forEach(day => {
+            const el = document.getElementById('tot' + day.toUpperCase());
+            if (el) el.textContent = totals[day];
+        });
+    }
+
+    function updateStatus() {
+        const modified = document.querySelectorAll('.prod-input.modified');
+        const status = document.getElementById('status');
+        if (modified.length > 0) {
+            let totalDelta = 0;
+            modified.forEach(input => {
+                const orig = parseInt(input.dataset.original) || 0;
+                const val = parseInt(input.value) || 0;
+                totalDelta += (val - orig);
+            });
+            const deltaStr = totalDelta >= 0 ? '+' + totalDelta : '' + totalDelta;
+            status.textContent = modified.length + ' modifiche | Delta totale: ' + deltaStr + ' pezzi';
+            status.style.color = totalDelta <= 0 ? '#38a169' : '#e53e3e';
+        } else {
+            status.textContent = 'Modifica le quantita\' e pubblica quando pronto';
+            status.style.color = '#718096';
         }
     }
+
+    // ===== SALVATAGGIO LOCALE =====
+    function savePlanification() {
+        localStorage.setItem('piano_' + currentLocation, JSON.stringify(pianificazione));
+    }
+
+    function loadSaved() {
+        const saved = localStorage.getItem('piano_' + currentLocation);
+        pianificazione = saved ? JSON.parse(saved) : {};
+    }
+
+    function resetModifiche() {
+        pianificazione = {};
+        localStorage.removeItem('piano_' + currentLocation);
+        renderTable();
+        updateStatus();
+    }
+
+    // ===== PUBBLICAZIONE =====
+    function pubblica() {
+        const btn = document.getElementById('btn-pubblica');
+        const status = document.getElementById('status');
+        btn.disabled = true;
+        status.textContent = 'Pubblicazione in corso...';
+        status.style.color = '#4299e1';
+
+        // Raccogli tutti i dati della tabella corrente
+        const payload = {};
+        document.querySelectorAll('.prod-input').forEach(input => {
+            payload[input.dataset.key] = parseInt(input.value) || 0;
+        });
+
+        fetch('/pubblica', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                locale: currentLocation,
+                pianificazione: payload,
+                html: document.documentElement.outerHTML
+            })
+        })
+        .then(r => r.json())
+        .then(data => {
+            if (data.ok) {
+                status.textContent = 'Pubblicato con successo!';
+                status.style.color = '#38a169';
+                btn.textContent = 'Pubblicato!';
+            } else {
+                status.textContent = 'Errore: ' + (data.error || 'sconosciuto');
+                status.style.color = '#e53e3e';
+                btn.disabled = false;
+            }
+        })
+        .catch(() => {
+            status.textContent = 'Errore di connessione';
+            status.style.color = '#e53e3e';
+            btn.disabled = false;
+        });
+    }
+
+    // ===== START =====
+    init();
     </script>
 </body>
 </html>
